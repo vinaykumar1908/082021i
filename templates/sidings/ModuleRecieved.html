@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Modules Recieved - Create Entry
+{% endblock title %}
+{% block content %}
+ 
+
+<div class="content-section center">
+    <form method="POST" action="{%url 'siding_Modules_Recieved'%}">
+        {%csrf_token%}
+       
+         <h1>Module Recieved</h1>
+         <h1>New Entry</h1>
+            <button class="btn btn-success" type="submit">Post</button>
+            
+            <a class="btn btn-success" href="{% url 'sidings_home' %}"> Back</a> 
+            <h3> Important! date format : YYYY-MM-DD</h3>
+        
+        
+        
+            
+            <div class='form-group center'>
+            <input type="text" class="form-control" id="RakeNumber" name="RakeNumber"  style="background-color: white; color:black" placeholder='RakeNumber' />
+            <input type="text" class="form-control" id="BPC_Number" name="BPC_Number"  style="background-color: white; color:black" placeholder='BPC_Number' />            
+            <select name="ModulePresentPosition" id="ModulePresentPosition" class="form-control" style="background-color: white; color:black" placeholder='ModulePresentPosition'/ >
+              <option value="TKD_ROH1">TKD_ROH1</option>
+              <option value="TKD_ROH2">TKD_ROH2</option>
+              <option value="TKD_Sickline">TKD_Sickline</option>
+              <option value="TKD_ACTL">TKD_ACTL</option>
+              <option value="TKD_HTPP_PWL">TKD_HTPP_PWL</option>
+              <option value="TKD_ICD">TKD_ICD</option>
+              <option value="TKD_YARD">TKD_YARD</option>
+              <option value="SSB_ICD_GHH">SSB_ICD_GHH</option>
+              <option value="SSB_ICD_PT">SSB_ICD_PT</option>
+              <option value="GZB_ICD_NOLI">GZB_ICD_NOLI</option>
+              <option value="GZB_ICD_MUZ">GZB_ICD_MUZ</option>
+              <option value="PNP_BMDJ">PNP_BMDJ</option>
+              <option value="PNP_PCWD_DWNA">PNP_PCWD_DWNA</option>
+            </select>
+            
+            <select name="LineNumber" id="LineNumber" class="form-control" style="background-color: white; color:black" placeholder='LineNumber'/ >
+              <option value="NH1">NH1</option>
+              <option value="NH2">NH2</option>
+              <option value="NH4">NH4</option>
+              <option value="NH5">NH5</option>
+              <option value="NH6">NH6</option>
+              <option value="NH7">NH7</option>
+              <option value="NH8">NH8</option>
+            </select>
+
+            
+            
+            <input type="text" class="form-control" id="ModuleName" name="ModuleName"  style="background-color: white; color:black" placeholder='ModuleName'/>
+            </div>
+            <div class='form-group center'>
+            <input type="text" class="form-control" id="datepicker1" name="ModuleROHDate"  style="background-color: white; color:black" placeholder="Module ROH Date" aria-label="Module ROH Date">
+            <input type="text" class="form-control" id="ROHStation" name="ROHStation"  style="background-color: white; color:black" placeholder='ROHStation'/>
+            <input type="text" class="form-control" id="POHStation" name="POHStation"  style="background-color: white; color:black" placeholder='POHStation'/>
+            </div>
+            <div class="form-group center">
+            <input type="text" class="form-control" id="Wagon1Number" name="Wagon1Number"  style="background-color: white; color:black" placeholder='Wagon1Number'/>
+            <input type="text" class="form-control" id="Wagon2Number" name="Wagon2Number"  style="background-color: white; color:black" placeholder='Wagon2Number'/>
+            <input type="text" class="form-control" id="Wagon3Number" name="Wagon3Number"  style="background-color: white; color:black" placeholder='Wagon3Number'/>
+            <input type="text" class="form-control" id="Wagon4Number" name="Wagon4Number"  style="background-color: white; color:black" placeholder='Wagon4Number'/>
+            <input type="text" class="form-control" id="Wagon5Number" name="Wagon5Number"  style="background-color: white; color:black" placeholder='Wagon5Number'/>
+            </div>
+            <div class="form-group center">
+            <select name = "Wagon1Type" id = "Wagon1Type" class = "form-control" style = "background-color: white; color:black" placeholder = 'Wagon1Type' / >
+<option value = "BOXN" > BOXN </option >
+<option value = "BOXNHL" > BOXNHL </option >
+<option value = "BLCB" > BLCB </option >
+<option value = "BLCA" > BLCA </option >
+<option value = "BLLA" > BLLA </option >
+<option value = "BLLB" > BLLB </option >
+<option value = "BOBYN" > BOBYN </option >
+<option value = "BFKHN" > BFKHN </option >
+<option value = "BVZI" > BVZI </option >
+<option value = "BTPN" > BTPN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCNHS" > BCNHS </option >
+</select>
+<select name = "Wagon2Type" id = "Wagon2Type" class = "form-control" style = "background-color: white; color:black" placeholder = 'Wagon2Type' / >
+<option value = "BOXN" > BOXN </option >
+<option value = "BOXNHL" > BOXNHL </option >
+<option value = "BLCB" > BLCB </option >
+<option value = "BLCA" > BLCA </option >
+<option value = "BLLA" > BLLA </option >
+<option value = "BLLB" > BLLB </option >
+<option value = "BOBYN" > BOBYN </option >
+<option value = "BFKHN" > BFKHN </option >
+<option value = "BVZI" > BVZI </option >
+<option value = "BTPN" > BTPN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCNHS" > BCNHS </option >
+</select>
+<select name = "Wagon3Type" id = "Wagon3Type" class = "form-control" style = "background-color: white; color:black" placeholder = 'Wagon3Type' / >
+<option value = "BOXN" > BOXN </option >
+<option value = "BOXNHL" > BOXNHL </option >
+<option value = "BLCB" > BLCB </option >
+<option value = "BLCA" > BLCA </option >
+<option value = "BLLA" > BLLA </option >
+<option value = "BLLB" > BLLB </option >
+<option value = "BOBYN" > BOBYN </option >
+<option value = "BFKHN" > BFKHN </option >
+<option value = "BVZI" > BVZI </option >
+<option value = "BTPN" > BTPN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCNHS" > BCNHS </option >
+</select>
+<select name = "Wagon4Type" id = "Wagon4Type" class = "form-control" style = "background-color: white; color:black" placeholder = 'Wagon4Type' / >
+<option value = "BOXN" > BOXN </option >
+<option value = "BOXNHL" > BOXNHL </option >
+<option value = "BLCB" > BLCB </option >
+<option value = "BLCA" > BLCA </option >
+<option value = "BLLA" > BLLA </option >
+<option value = "BLLB" > BLLB </option >
+<option value = "BOBYN" > BOBYN </option >
+<option value = "BFKHN" > BFKHN </option >
+<option value = "BVZI" > BVZI </option >
+<option value = "BTPN" > BTPN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCNHS" > BCNHS </option >
+</select>
+<select name = "Wagon5Type" id = "Wagon5Type" class = "form-control" style = "background-color: white; color:black" placeholder = 'Wagon5Type' / >
+<option value = "BOXN" > BOXN </option >
+<option value = "BOXNHL" > BOXNHL </option >
+<option value = "BLCB" > BLCB </option >
+<option value = "BLCA" > BLCA </option >
+<option value = "BLLA" > BLLA </option >
+<option value = "BLLB" > BLLB </option >
+<option value = "BOBYN" > BOBYN </option >
+<option value = "BFKHN" > BFKHN </option >
+<option value = "BVZI" > BVZI </option >
+<option value = "BTPN" > BTPN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCN" > BCN </option >
+<option value = "BCNHS" > BCNHS </option >
+</select>
+            
+            </div>
+            <div class='form-group center'>
+            <h4>#-----For Ready Reference-----#</h4>
+            <h5>EMPAD-0x-BKN</h5>
+            <h5>Door-Hinge-BKN</h5>
+            <h5>Adopter-Worn-Out</h5>
+            <h5>Wheel-Change</h5>
+            <h5>Pl. Mention If Any Other</h5>
+
+            <h4>#-----For Ready Reference-----#</h4>
+            <input type="text" class="form-control" id="Wagon1Defect" name="Wagon1Defect"  style="background-color: white; color:black" placeholder='Wagon1Defect: Input Items Changed'/>
+            <input type="text" class="form-control" id="Wagon2Defect" name="Wagon2Defect"  style="background-color: white; color:black" placeholder='Wagon2Defect: Input Items Changed'/>
+            <input type="text" class="form-control" id="Wagon3Defect" name="Wagon3Defect"  style="background-color: white; color:black" placeholder='Wagon3Defect: Input Items Changed'/>
+            <input type="text" class="form-control" id="Wagon4Defect" name="Wagon4Defect"  style="background-color: white; color:black" placeholder='Wagon4Defect: Input Items Changed'/>
+            <input type="text" class="form-control" id="Wagon5Defect" name="Wagon5Defect"  style="background-color: white; color:black" placeholder='Wagon5Defect: Input Items Changed'/>
+            
+            </div>
+            <div class='form-group center'>
+            <input type="text" class="form-control" id="ModuleRecieveDate" name="ModuleRecieveDate"  style="background-color: white; color:black" placeholder='ModuleRecieveDate'/>
+            </div>
+            <div class='custom-control custom-checkbox mb-3 center bg-warning'>
+            <h4>  ******* IMPORTANT ******* </h4>
+
+            <input type="checkbox"  class="custom-control-input" id="ModuleDVS" name="ModuleDVS" value="ModuleDVS">
+            <label class="custom-control-label" for="male">Module DVS ?</label><br>
+            <input type="checkbox" class="custom-control-input" id="ModuleDVR" name="ModuleDVR" value="ModuleDVR">
+            <label for="female" class="custom-control-label">Module DVR ?</label><br>
+            <input type="checkbox" class="custom-control-input" id="ModuleMadeFit" name="ModuleMadeFit" value="ModuleMadeFit">
+            <label for="other" class="custom-control-label">Module Made Fit ?</label><br><br>
+            <h4>  ******* IMPORTANT ******* </h4>
+            </div>
+            
+            </div>
+            </div>
+            <script>
+            $( "#dispatchSickline" ).autocomplete({
+              source: '{%url 'autocomplete'%}'
+                });
+            </script>
+            <script>
+            var availableTags = [
+            "TKD_ROH1", 
+            "TKD_ROH 2", 
+            "TKD_Sickline", 
+            "TKD_ACTL", 
+            "TKD_HTPP_PWL", 
+            "TKD_ICD",
+            "TKD_YARD",
+            "SSB_ICD_GHH",
+            "SSB_ICD_PTT",
+            "GZB_ICD_NOLI",
+            "GZB_ICD_MUZ",
+            "PNP_BMDJ",
+            "PNP_PCWD_DWNA"
+            ];
+            $( "#ModulePresentPosition" ).autocomplete({
+              source: availableTags
+                });
+            </script>
+            <script>
+              $( function() {
+              $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+            <script>
+              $( function() {
+              $( "#ModuleRecieveDate" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+            
+        </form>
+        
+    </form>
+</div>
+<div> 
+</div>
+
+
+{% endblock %}
