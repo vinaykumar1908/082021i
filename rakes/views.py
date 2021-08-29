@@ -33,6 +33,10 @@ class RakeDetailView(LoginRequiredMixin, DetailView):
 
 @login_required
 def AddModule(request):
+    form5 = ModuleForm()
+    context = {
+        'form5': form5,
+    }
     if request.method == 'POST':
         print("******request.post1*******")
         print(request.POST)
@@ -59,12 +63,16 @@ def AddModule(request):
         if not form.is_valid():
             message = messages.warning(request, "Module Not Added ")
             print("ERROR")
-    form5 = ModuleForm()
-    context = {
-        'messages': message,
-        'form5': form5,
-    }
+        form5 = ModuleForm()
+        context = {
+            'messages': message,
+            'form5': form5,
+        }
 
+        return render(request, 'rakes/rake_entry_form.html', context)
+        print('MPOST request accepted')
+        pass
+    print("MPOST Request bypassed")
     return render(request, 'rakes/rake_entry_form.html', context)
 
 
@@ -108,9 +116,9 @@ def AddRake(request):
         }
 
         return render(request, 'rakes/rake_entry_form.html', context)
-        print('POST request accepted')
+        print('RPOST request accepted')
         pass
-    print("POST Request bypassed")
+    print("RPOST Request bypassed")
     return render(request, 'rakes/rake_entry_form.html', context)
 
 @login_required
