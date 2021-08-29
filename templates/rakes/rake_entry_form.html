@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+
+<div class="row align-items-start">
+
+<form method="POST" action="{%url 'AddModule'%}">
+{% csrf_token %}
+
+<div class="col-sm-4 w-50 center2">
+<h3 >ADD MODULE</h3>
+{{form5|crispy}}
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+</div>
+
+
+
+<div class="col-sm-6 center2">
+<form method="POST" action="{%url 'Rakes_entry'%}">
+{% csrf_token %}
+<fieldset class="form-group ">
+<h3 >Create New Rake</h3>
+<h5>Rake Name</h5>
+<input type="text" id="R" name="RakeName"  style="background-color: white; color:black" /> 
+<div>   
+<h5>Module1</h5>
+<input type="text" id="M1" name="mod1"  style="background-color: white; color:black" />
+<h5>Module2</h5>
+<input type="text" id="M2" name="mod2"  style="background-color: white; color:black" />
+<h5>Module3</h5>
+<input type="text" id="M3" name="mod3"  style="background-color: white; color:black" />
+<h5>Module4</h5>
+<input type="text" id="M4" name="mod4"  style="background-color: white; color:black" />
+<h5>Module5</h5>
+<input type="text" id="M5" name="mod5"  style="background-color: white; color:black" />
+<h5>Module6</h5>
+<input type="text" id="M6" name="mod6"  style="background-color: white; color:black" />
+<h5>Module7</h5>
+<input type="text" id="M7" name="mod7"  style="background-color: white; color:black" />
+<h5>Module8</h5>
+<input type="text" id="M8" name="mod8"  style="background-color: white; color:black" />
+<h5>Module9</h5>
+<input type="text" id="M9" name="mod9"  style="background-color: white; color:black" />
+
+</div>
+<input type="submit" value="save" style="background-color: lightcoral; color:black" />
+</form>
+</div>
+
+<script>
+$( "#M1" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M2" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M3" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M4" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M5" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M6" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M7" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M8" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+<script>
+$( "#M9" ).autocomplete({
+source: '{%url 'autocomplete1'%}'
+});
+</script>
+</fieldset>
+
+</form>
+</div>
+</div>
+{% endblock content %}

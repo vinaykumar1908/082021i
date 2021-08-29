@@ -122,7 +122,7 @@ def currentStockListView(request):
     print("-----newObj-----")
     print(newObj)
     print("-----newObj.MAC-----")
-    print(newObj.first().MAC)
+    #print(newObj.first().MAC)
     form1 = registerStockRecievedForm()
     form2 = registerStockDispatchROHform()
     form3 = registerStockDispatchSicklineform()

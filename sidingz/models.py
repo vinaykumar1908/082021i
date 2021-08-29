@@ -148,7 +148,7 @@ class ModuleRecieved(models.Model):
     def save(self, *args, **kwargs):
         account_sid = "AC79222237cf68f0144f588d681e56907d"
         # Your Auth Token from twilio.com/console
-        auth_token = "8615e3c2624434b67a2da8a5a56d3502"
+        auth_token = "bee236c2075708556bd4e43049db5c05"
 
         client = Client(account_sid, auth_token)
 
@@ -160,6 +160,5 @@ class ModuleRecieved(models.Model):
         print(message.sid)
         print("Module Saved !")
         return super().save(*args, **kwargs)
-    
 
 
