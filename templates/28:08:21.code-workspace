@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": ".."
-		},
-		{
-			"path": "../../../../Downloads/django-telusko-codes-master/telusko"
 		}
 	],
 	"settings": {}
