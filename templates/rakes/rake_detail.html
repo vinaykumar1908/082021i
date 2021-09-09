@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Rake Details-{{ object.RakeName }} - {{ object.Date}}
+{% endblock title %}
+
+{% block content %} 
+<h3 style="font-family: 'Courier New'; font-style: italic;"> Rake: {{object.RakeName}} </h3>
+<div> 
+    <a class="btn btn-success" href="{%url 'Rake_list'%}"><h5> Back</h5></a> 
+    <a class="btn btn-success" href="{%url 'Rake_edit' object.pk%}"><h5> Edit Entry</h5></a>
+</div>
+<div class="book-detail">
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Rake Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.RakeName}}</td>
+            </tr>
+        </tbody>
+</div> 
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Module 1 Number</th>
+            <th>Module 2 Number</th>
+            <th>Module 3 Number</th>
+            <th>Module 4 Number</th>
+            <th>Module 5 Number</th>
+            <th>Module 6 Number</th>
+            <th>Module 7 Number</th>
+            <th>Module 8 Number</th>
+            <th>Module 9 Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{%if object.Module1 != None %}<a href="{%url 'Module_detail' object.Module1.pk %}" target="_blank">{{object.Module1}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module2 != None %}<a href="{%url 'Module_detail' object.Module2.pk %}" target="_blank">{{object.Module2}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module3 != None %}<a href="{%url 'Module_detail' object.Module3.pk %}" target="_blank">{{object.Module3}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module4 != None %}<a href="{%url 'Module_detail' object.Module4.pk %}" target="_blank">{{object.Module4}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module5 != None %}<a href="{%url 'Module_detail' object.Module5.pk %}" target="_blank">{{object.Module5}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module6 != None %}<a href="{%url 'Module_detail' object.Module6.pk %}" target="_blank">{{object.Module6}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module7 != None %}<a href="{%url 'Module_detail' object.Module7.pk %}" target="_blank">{{object.Module7}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module8 != None %}<a href="{%url 'Module_detail' object.Module8.pk %}" target="_blank">{{object.Module8}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.Module9 != None %}<a href="{%url 'Module_detail' object.Module9.pk %}" target="_blank">{{object.Module9}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+            </tr>
+        </tbody>
+    
+
+</div>
+
+{%if object.ROHFile and object.ModuleDVR %}
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>ROH FILE </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'><a class="btn btn-danger btn-lg " href="{{object.ROHFile.url}}"> View Uploaded File</a></td>
+                
+                
+            </tr>
+        </tbody>
+        
+
+</div>
+{%endif%}
+      
+      
+{% endblock content %}

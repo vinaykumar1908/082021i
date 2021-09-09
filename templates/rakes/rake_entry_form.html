@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+            
 {% block content %}
 <div class="container">
 
@@ -14,9 +23,81 @@
 <input type="submit" value="save" style="background-color: lightcoral; color:black"/>
 </form>
 </div>
+<form method="POST" action="{%url 'Rakes_entry'%}">
+{% csrf_token %}
 
+<div class="col-sm-4 w-50 center2">
+<h3 >ADD RAKE</h3>
+    <input type="text",class="form-control form-group ", id="RakeName" name="RakeName"  style="background-color: white; color:black" placeholder="Enter Rake Name" aria-label="Enter Rake Name" >
+    <br>
+    <input type="text",class="form-control form-group ", id="M1" name="M1"  style="background-color: white; color:black" placeholder="Enter Module 1" aria-label="Enter Module 1" >
+            <script>
+            $( "#M1" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M2" name="M2"  style="background-color: white; color:black" placeholder="Enter Module 2" aria-label="Enter Module 2" >
+            <script>
+            $( "#M2" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M3" name="M3"  style="background-color: white; color:black" placeholder="Enter Module 3" aria-label="Enter Module 3" >
+            <script>
+            $( "#M3" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M4" name="M4"  style="background-color: white; color:black" placeholder="Enter Module 4" aria-label="Enter Module 4" >
+            <script>
+            $( "#M4" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M5" name="M5"  style="background-color: white; color:black" placeholder="Enter Module 5" aria-label="Enter Module 5" >
+            <script>
+            $( "#M5" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M6" name="M6"  style="background-color: white; color:black" placeholder="Enter Module 6" aria-label="Enter Module 6" >
+            <script>
+            $( "#M6" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M7" name="M7"  style="background-color: white; color:black" placeholder="Enter Module 7" aria-label="Enter Module 7" >
+            <script>
+            $( "#M7" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M8" name="M8"  style="background-color: white; color:black" placeholder="Enter Module 8" aria-label="Enter Module 8" >
+            <script>
+            $( "#M8" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+    <input type="text",class="form-control form-group ", id="M9" name="M9"  style="background-color: white; color:black" placeholder="Enter Module 9" aria-label="Enter Module 9" >
+            <script>
+            $( "#M9" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            <br>
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+</div>
 
-
+<!-- 
 <div class="col-sm-6 center2">
 <form method="POST" action="{%url 'Rakes_entry'%}">
 {% csrf_token %}
@@ -26,23 +107,23 @@
 <input type="text" id="R" name="RakeName"  style="background-color: white; color:black" /> 
 <div>   
 <h5>Module1</h5>
-<input type="text" id="M1" name="mod1"  style="background-color: white; color:black" />
+<input type="text" id="M1" name="Module1"  style="background-color: white; color:black" />
 <h5>Module2</h5>
-<input type="text" id="M2" name="mod2"  style="background-color: white; color:black" />
+<input type="text" id="M2" name="Module2"  style="background-color: white; color:black" />
 <h5>Module3</h5>
-<input type="text" id="M3" name="mod3"  style="background-color: white; color:black" />
+<input type="text" id="M3" name="Module3"  style="background-color: white; color:black" />
 <h5>Module4</h5>
-<input type="text" id="M4" name="mod4"  style="background-color: white; color:black" />
+<input type="text" id="M4" name="Module4"  style="background-color: white; color:black" />
 <h5>Module5</h5>
-<input type="text" id="M5" name="mod5"  style="background-color: white; color:black" />
+<input type="text" id="M5" name="Module5"  style="background-color: white; color:black" />
 <h5>Module6</h5>
-<input type="text" id="M6" name="mod6"  style="background-color: white; color:black" />
+<input type="text" id="M6" name="Module6"  style="background-color: white; color:black" />
 <h5>Module7</h5>
-<input type="text" id="M7" name="mod7"  style="background-color: white; color:black" />
+<input type="text" id="M7" name="Module7"  style="background-color: white; color:black" />
 <h5>Module8</h5>
-<input type="text" id="M8" name="mod8"  style="background-color: white; color:black" />
+<input type="text" id="M8" name="Module8"  style="background-color: white; color:black" />
 <h5>Module9</h5>
-<input type="text" id="M9" name="mod9"  style="background-color: white; color:black" />
+<input type="text" id="M9" name="Module9"  style="background-color: white; color:black" />
 
 </div>
 <input type="submit" value="save" style="background-color: lightcoral; color:black" />
@@ -95,7 +176,7 @@ source: '{%url 'autocomplete1'%}'
 });
 </script>
 </fieldset>
-
+-->
 </form>
 </div>
 </div>

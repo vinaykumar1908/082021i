@@ -36,7 +36,7 @@ class Profile(AbstractUser):
     DateOfJoining = models.DateField(null=True, default='1001-01-01', blank=True)
 
     def __str__(self):
-        return f'{self.username} Profile'
+        return f'{self.username}'
 
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)

@@ -16,3 +16,6 @@ class ModuleForm(ModelForm):
         model = Module
         fields = ['ModuleName', 'Wagon1Number', 'Wagon2Number',
                   'Wagon3Number', 'Wagon4Number', 'Wagon5Number']
+
+
+

@@ -25,23 +25,68 @@ class RakesHomePageView(LoginRequiredMixin, TemplateView):
     template_name = 'Rakes_home.html'
 
 
-class RakeDetailView(LoginRequiredMixin, DetailView):
+class RakeListView(LoginRequiredMixin, ListView):
     model = Rake
     context_object_name = 'post'
-    template_name = 'rakes/post_detail.html'
+    template_name = 'rakes/rake_list.html'
+    paginate_by = 20
 
+
+class ModuleListView(LoginRequiredMixin, ListView):
+    model = Module
+    context_object_name = 'post'
+    template_name = 'rakes/module_list.html'
+    paginate_by = 20
+
+
+class ModuleEditView(LoginRequiredMixin, UpdateView):
+    model = Module
+    fields = ['ModuleName',
+              'ROHStation', 'POHStation',
+              'Wagon1Number',
+              'Wagon2Number',
+              'Wagon3Number',
+              'Wagon4Number',
+              'Wagon5Number', 'ModuleType', 'ModuleCommDate', 'ModuleROHDate', 'ModulePOHDate', 'Modified']
+    template_name = 'rakes/ModulesList_edit.html'
+
+
+class RakeEditView(LoginRequiredMixin, UpdateView):
+    model = Rake
+    fields = ['RakeName',
+              'RakeBase', 
+              'Module1',
+              'Module2', 
+              'Module3', 
+              'Module4', 
+              'Module5', 
+              'Module6', 
+              'Module7', 
+              'Module8', 
+              'Module9']
+    template_name = 'rakes/rakeList_edit.html'
+class ModuleDetailView(LoginRequiredMixin, DetailView):
+    model = Module
+    template_name = 'rakes/module_detail.html'
+
+class RakeDetailView(LoginRequiredMixin, DetailView):
+    model = Rake
+    template_name = 'rakes/rake_detail.html'
 
 @login_required
 def AddModule(request):
     form5 = ModuleForm()
+    form6 = RakeForm()
     context = {
         'form5': form5,
+        'form6': form6,
     }
     if request.method == 'POST':
         print("******request.post1*******")
         print(request.POST)
         print(request.user)
         form = ModuleForm(request.POST)
+        
         print(form)
        # form.author = request.user
         #print(form.author)
@@ -56,7 +101,7 @@ def AddModule(request):
 
             added = Module(
                 Date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), ModuleName=M,
-                Wagon1Number=W1, Wagon2Number=W2, Wagon3Number=W3, Wagon4Number=W4, Wagon5Number=W5)
+                Wagon1Number=W1, Wagon2Number=W2, Wagon3Number=W3, Wagon4Number=W4, Wagon5Number=W5, author=request.user)
             print(added)
             added.save()
             message = messages.success(request, "Module Added Successfully ")
@@ -67,6 +112,8 @@ def AddModule(request):
         context = {
             'messages': message,
             'form5': form5,
+            'form6': form6,
+
         }
 
         return render(request, 'rakes/rake_entry_form.html', context)
@@ -78,48 +125,62 @@ def AddModule(request):
 
 @login_required
 def AddRake(request):
-    form5 = ModuleForm()
-    context = {
-        'form5': form5,
-    }
+    
+    q = Module.objects
+    p = Rake.objects
+    
     if request.method == 'POST':
-        form = RakeForm(request.POST)
-        if form.is_valid():
-            print("form is true")
-            R = form.cleaned_data['RakeName']
-            M1 = form.cleaned_data['Module1']
-            M2 = form.cleaned_data['Module2']
-            M3 = form.cleaned_data['Module3']
-            M4 = form.cleaned_data['Module4']
-            M5 = form.cleaned_data['Module5']
-            M6 = form.cleaned_data['Module6']
-            M7 = form.cleaned_data['Module7']
-            M8 = form.cleaned_data['Module8']
-            M9 = form.cleaned_data['Module9']
-            #M4 = form.cleaned_data['Wagon4Number']
-            #M5 = form.cleaned_data['Wagon5Number']
-            added = Rake(
-                Date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), RakeName=R,
-                Module1=M1, Module2=M2, Module3=M3, Module4=M4, Module5=M5, Module6=M6, Module7=M7, Module8=M8, Module9=M9)
-            print(added)
-            added.save()
-            message = messages.success(request, "Rake Added Successfully ")
-            print(message)
-        if not form.is_valid():
+        newRake = Rake(
+            RakeName=request.POST.get('RakeName'),
+            Module1=q.filter(
+                ModuleName__iexact=request.POST.get('M1')).first(),
+            Module2=q.filter(
+                ModuleName__iexact=request.POST.get('M2')).first(),
+            Module3=q.filter(
+                ModuleName__iexact=request.POST.get('M3')).first(),
+            Module4=q.filter(
+                ModuleName__iexact=request.POST.get('M4')).first(),
+            Module5=q.filter(
+                ModuleName__iexact=request.POST.get('M5')).first(),
+            Module6=q.filter(
+                ModuleName__iexact=request.POST.get('M6')).first(),
+            Module7=q.filter(
+                ModuleName__iexact=request.POST.get('M7')).first(),
+            Module8=q.filter(
+                ModuleName__iexact=request.POST.get('M8')).first(),
+            Module9=q.filter(
+                ModuleName__iexact=request.POST.get('M9')).first())
+        if newRake:
+            newRake.save()
+            message = messages.success(request, "Rake Added ")
+            form5 = ModuleForm()
+            form6 = RakeForm()
+            context = {
+                'messages': message,
+                'form5': form5,
+                'form6': form6
+            }
+            return render(request, 'rakes/rake_entry_form.html', context)
+        else:
             message = messages.warning(request, "Rake Not Added ")
-            print("ERROR")
-            print(message)
         form5 = ModuleForm()
+        form6 = RakeForm()
         context = {
             'messages': message,
             'form5': form5,
+            'form6': form6
         }
-
         return render(request, 'rakes/rake_entry_form.html', context)
-        print('RPOST request accepted')
-        pass
-    print("RPOST Request bypassed")
+    form5 = ModuleForm()
+    form6 = RakeForm()
+    context = {
+        
+        'form5': form5,
+        'form6': form6
+    }
     return render(request, 'rakes/rake_entry_form.html', context)
+
+
 
 @login_required
 def autocomplete1(request):
@@ -151,119 +212,210 @@ def autocomplete1(request):
 
 
 @login_required
-def SidingModuleRecievedPageView(request):
-    x = 1
+def moduleName(request):
+    if request.is_ajax():
+        print("request.GET")
+        print(request.GET)
+        if 'term' in request.GET:
+            #print(term)
+            qs = Module.objects.all()
+            print("qs")
+            print(qs)
+            itemTerm = request.GET.get('term')
+            print("itemTerm")
+            print(itemTerm)
+            res = qs.filter(ModuleName__icontains=itemTerm)
+            print("res")
+            print(res)
+            Item = list()
+            for product in res:
+                place_json = {}
+                place_json = product.ModuleName
+                Item.append(place_json)
+                print("*------JsonResponse Start-----*")
+                print(Item)
+                print("*------JsonResponse End-----*")
+            return JsonResponse(Item, safe=False)
+
+            return render(request, 'rakes/module_list.html')
+@login_required
+def RakeNumber(request):
+    if request.is_ajax():
+        if 'term' in request.GET:
+            qs = Rake.objects.all()
+            print("qs")
+            print(qs)
+            itemTerm = request.GET.get('term')
+            print("itemTerm")
+            print(itemTerm)
+            res = qs.filter(__icontains=itemTerm)
+            print("resRAKE")
+            print(res)
+            Item = list()
+            for product in res:
+                if product.RakeNumber in Item:
+                    pass
+                else:
+                    place_json = {}
+                    place_json = product.RakeNumber
+                    Item.append(place_json)
+                    print("*------JsonResponse Start-----*")
+                    print(Item)
+                    print("*------JsonResponse End-----*")
+            return JsonResponse(Item, safe=False)
+
+    return render(request, 'sidings/ModulesList.html')
+
+
+@login_required
+def ModuleDetailLink(request):
     if request.method == 'POST':
-        print(request.POST)
-        form = ModuleRecievedForm(request.POST)
-        if form.is_valid():
-            RakeNumber0 = form.cleaned_data.get('RakeNumber', None)
-            BPC_Number = form.cleaned_data.get('BPC_Number', None)
+        ModuleName = request.POST.get('moduleName')
+        print("ModuleName")
+        print(ModuleName)
+        qs = Module.objects.all()
+        print("qs")
+        print(qs)
+        res = qs.filter(ModuleName=ModuleName)
+        #print("qs")
+        #print(qs)
+        #res = qs.get(ModuleName=moduleName)
+        print("res")
+        print(res)
+        context = {
+            'object_list': res
+        }
+    return render(request, 'rakes/module_list.html', context)
 
-            ModulePresentPosition = form.cleaned_data.get(
-                'ModulePresentPosition', None)
 
-            ModuleName = form.cleaned_data.get('ModuleName', None)
-
-            ModuleROHDate = form.cleaned_data.get('ModuleROHDate', None)
-
-            ROHStation = form.cleaned_data.get('ROHStation', None)
-            LineNumber = form.cleaned_data.get('LineNumber', None)
-
-            Wagon1Number = form.cleaned_data.get('Wagon1Number', None)
-
-            Wagon1Type = form.cleaned_data.get('Wagon1Type', None)
-            Wagon2Number = form.cleaned_data.get('Wagon2Number', None)
-
-            Wagon2Type = form.cleaned_data.get('Wagon2Type', None)
-            Wagon3Number = form.cleaned_data.get('Wagon3Number', None)
-
-            Wagon3Type = form.cleaned_data.get('Wagon3Type', None)
-            Wagon4Number = form.cleaned_data.get('Wagon4Number', None)
-
-            Wagon4Type = form.cleaned_data.get('Wagon4Type', None)
-            Wagon5Number = form.cleaned_data.get('Wagon5Number', None)
-
-            Wagon5Type = form.cleaned_data.get('Wagon5Type', None)
-            Wagon1Defect = form.cleaned_data.get('Wagon1Defect', None)
-            Wagon2Defect = form.cleaned_data.get('Wagon2Defect', None)
-            Wagon3Defect = form.cleaned_data.get('Wagon3Defect', None)
-            Wagon4Defect = form.cleaned_data.get('Wagon4Defect', None)
-            Wagon5Defect = form.cleaned_data.get('Wagon5Defect', None)
-            ModuleRecieveDate = form.cleaned_data.get(
-                'ModuleRecieveDate', None)
-
-            stockRecieved = form.cleaned_data.get('stockRecieved', None)
-            ModuleDVS = form.cleaned_data.get('ModuleDVS', None)
-            ModuleDVR = form.cleaned_data.get('ModuleDVR', None)
-            ModuleMadeFit = form.cleaned_data.get('ModuleMadeFit', None)
-            author = request.user
-            print(Wagon1Defect)
-            print(Wagon2Defect)
-            print(Wagon3Defect)
-            print(Wagon4Defect)
-            print(Wagon5Defect)
-            print(ModuleDVS)
-            print(ModuleDVR)
-            print(ModuleMadeFit)
-            if ModuleDVS == True:
-                MDVS = True
-                print("MDVS")
-                print(MDVS)
-            else:
-                MDVS = False
-                print("MDVS")
-                print(MDVS)
-
-            if ModuleDVR == True:
-                MDVR = True
-                print("MDVR")
-                print(MDVR)
-            else:
-                MDVR = False
-                print("MDVR")
-                print(MDVR)
-
-            if ModuleMadeFit == True:
-                MMF = True
-                print("MMF")
-                print(MMF)
-            else:
-                MMF = False
-                print("MMF")
-                print(MMF)
-            added = models.ModuleRecieved.objects.create(
-                RakeNumber=RakeNumber0, BPC_Number=BPC_Number,
-                ModulePresentPosition=ModulePresentPosition,
-                LineNumber=LineNumber, ModuleName=ModuleName,
-                ModuleROHDate=ModuleROHDate, ROHStation=ROHStation, POHStation='POHStation',
-                Wagon1Number=Wagon1Number, Wagon1Type=Wagon1Type,
-                Wagon2Number=Wagon2Number, Wagon2Type=Wagon2Type,
-                Wagon3Number=Wagon3Number, Wagon3Type=Wagon3Type,
-                Wagon4Number=Wagon4Number, Wagon4Type=Wagon4Type,
-                Wagon5Number=Wagon5Number, Wagon5Type=Wagon5Type,
-                ModuleRecieveDate=ModuleRecieveDate, ModuleDVS=MDVS,
-                ModuleDVR=MDVR, ModuleMadeFit=MMF, author=author, Wagon1Defect=Wagon1Defect, Wagon2Defect=Wagon2Defect, Wagon3Defect=Wagon3Defect, Wagon4Defect=Wagon4Defect, Wagon5Defect=Wagon5Defect)
-
-            print(added.ModuleDVS)
-            print(added.ModuleDVR)
-            print(added.ModuleMadeFit)
-            added.save()
-            x = 1
-            print("GO Through")
-        else:
-            print("did not GO THROUGH")
-            x = 0
-    form1 = ModuleRecievedForm()
-    if x == 1:
-        message = messages.success(request, "Success ")
-    elif x == 0:
-        message = messages.error(request, "Error ")
+@login_required
+def ModuleDetailLink3(request):
+    if request.method == 'POST':
+        ModuleName = request.POST.get('moduleName')
+        print("ModuleName")
+        print(ModuleName)
+        qs = Rake.objects
+        print("qs")
+        print(qs)
+        res = qs.filter(Q(Module1__ModuleName__icontains=ModuleName) |
+                     Q(Module2__ModuleName__icontains=ModuleName) |
+                     Q(Module3__ModuleName__icontains=ModuleName) |
+                     Q(Module4__ModuleName__icontains=ModuleName) |
+                     Q(Module5__ModuleName__icontains=ModuleName) |
+                     Q(Module6__ModuleName__icontains=ModuleName) |
+                     Q(Module7__ModuleName__icontains=ModuleName) |
+                     Q(Module8__ModuleName__icontains=ModuleName) |
+                     Q(Module9__ModuleName__icontains=ModuleName) )
+        #print("qs")
+        #print(qs)
+        #res = qs.get(ModuleName=moduleName)
+        print("res")
+        print(res)
     context = {
-        'messages': message,
-        'form1': form1,
-        'ModuleDefectForm': ModuleDefectForm()
-
+        'object_list': res
     }
+    return render(request, 'rakes/rake_list.html', context)
 
-    return render(request, 'sidings/ModuleRecieved.html', context)
+
+@login_required
+def RakeDetailLink2(request):
+    if request.method == 'POST':
+        ModuleName = request.POST.get('RakeNumber')
+        print("ModuleName")
+        print(ModuleName)
+        qs = Rake.objects
+        print("qs")
+        print(qs)
+        res = qs.filter(RakeName__icontains=ModuleName)
+        #print("qs")
+        #print(qs)
+        #res = qs.get(ModuleName=moduleName)
+        print("res")
+        print(res)
+    context = {
+        'object_list': res
+    }
+    return render(request, 'rakes/rake_list.html', context)
+
+
+@login_required
+def RakeDetailLink3(request):
+    if request.is_ajax():
+        if 'term' in request.GET:
+            qs = Rake.objects.all()
+            print("qs")
+            print(qs)
+            itemTerm = request.GET.get('term')
+            print("itemTerm")
+            print(itemTerm)
+            res = qs.filter(RakeName__icontains=itemTerm)
+            print("resRAKE")
+            print(res)
+            Item = list()
+            for product in res:
+                if product.RakeName in Item:
+                    pass
+                else:
+                    place_json = {}
+                    place_json = product.RakeName
+                    Item.append(place_json)
+                    print("*------JsonResponse Start-----*")
+                    print(Item)
+                    print("*------JsonResponse End-----*")
+            return JsonResponse(Item, safe=False)
+
+    return render(request, 'sidings/ModulesList.html')
+
+
+@login_required
+def wagonnumberlink(request):
+    if request.is_ajax():
+        if 'term' in request.GET:
+            qs = Module.objects.all()
+            print("qs")
+            print(qs)
+            itemTerm = request.GET.get('term')
+            print("itemTerm")
+            print(itemTerm)
+            res = qs.filter(Q(Wagon1Number__icontains=itemTerm) |
+                            Q(Wagon2Number__icontains=itemTerm) |
+                            Q(Wagon3Number__icontains=itemTerm) |
+                            Q(Wagon4Number__icontains=itemTerm) |
+                            Q(Wagon5Number__icontains=itemTerm) )
+            print("resRAKE")
+            print(res)
+            Item = list()
+            for product in res:
+                if product.ModuleName in Item:
+                    pass
+                else:
+                    place_json = {}
+                    place_json = product.ModuleName
+                    Item.append(place_json)
+                    print("*------JsonResponse Start-----*")
+                    print(Item)
+                    print("*------JsonResponse End-----*")
+            return JsonResponse(Item, safe=False)
+
+    return render(request, 'sidings/ModulesList.html')
+
+
+@login_required
+def WagonDetailLink(request):
+    if request.method == 'POST':
+        ModuleName = request.POST.get('wagonnumber')
+        print("ModuleName")
+        print(ModuleName)
+        qs = Module.objects
+        print("qs")
+        print(qs)
+        res = qs.filter(ModuleName__icontains=ModuleName)
+        #print("qs")
+        #print(qs)
+        #res = qs.get(ModuleName=moduleName)
+        print("res")
+        print(res)
+    context = {
+        'object_list': res
+    }
+    return render(request, 'rakes/module_list.html', context)

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Module Details {{ object.ModuleName }} - {{ object.Date}}
+{% endblock title %}
+
+{% block content %} 
+<h3 style="font-family: 'Courier New'; font-style: italic;"> Module: {{object.ModuleName}} </h3>
+<div> 
+    <a class="btn btn-success" href="{%url 'Module_edit' object.pk%}"><h5> Edit Entry</h5></a>
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Wagon 1 Number</th>
+            <th>Wagon 2 Number</th>
+            <th>Wagon 3 Number</th>
+            <th>Wagon 4 Number</th>
+            <th>Wagon 5 Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Wagon1Number}}</td>
+                <td class='text-primary'>{{object.Wagon2Number}}</td>
+                <td class='text-primary'>{{object.Wagon3Number}}</td>
+                <td class='text-primary'>{{object.Wagon4Number}}</td>
+                <td class='text-primary'>{{object.Wagon5Number}}</td>
+            </tr>
+        </tbody>
+    
+
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>Module Commissioning Date</th>  
+            <th>Module ROH Date</th>
+            <th>Module ROH Station</th>
+            <th>Module POH Date</th>
+            <th>Module POH Station</th>
+            <th>Module Type</th>
+            <th>Modified ?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.ModuleCommDate}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ROHStation}}</td>
+                <td class='text-primary'>{{object.ModulePOHDate}}</td>
+                <td class='text-primary'>{{object.POHStation}}</td>
+                <td class='text-primary'>{{object.ModuleType}}</td>
+                <td class='text-primary'>
+                {% if object.Modified == 0  %}
+                     Un-Modified
+                {% else %}
+                     Modified
+                {% endif %}
+                </td>    
+            </tr>
+        </tbody>
+
+
+</div>
+
+
+{%if object.ROHFile and object.ModuleDVR %}
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>ROH FILE </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'><a class="btn btn-danger btn-lg " href="{{object.ROHFile.url}}"> View Uploaded File</a></td>
+                
+                
+            </tr>
+        </tbody>
+        
+
+</div>
+{%endif%}
+      
+      
+{% endblock content %}

@@ -11,12 +11,9 @@ from django.conf import settings
 class Module(models.Model):
     WAGON_TYPE_CHOICES = (
         ("SelectWagon", "Please Select Wagon Type"),
-        ("BLCA", "BLCA"),
-        ("BLCB", "BLCB"),
-        ("BLLA", "BLLA"),
-        ("BLLB", "BLLB"),
-        ("BLCMA", "BLCMA"),
-        ("BLCMB", "BLCMB"),
+        ("BLC", "BLC"),
+        ("BLL", "BLL"),
+        ("BLCM", "BLCM"),
         ("BVZC", "BVZC"),
         ("BVZI", "BVZI"),
         ("BFKHN", "BFKHN"),
@@ -24,39 +21,23 @@ class Module(models.Model):
     Date = models.DateTimeField(default=timezone.now, null=True,blank=True)
     ModuleName = models.CharField(max_length=20, null=True, unique=True)
     Wagon1Number = models.BigIntegerField(null=True, blank=True)
-    Wagon1Type = models.CharField(
-        max_length=11, choices=WAGON_TYPE_CHOICES, default='SelectWagon', null=True, blank=True)
+    ModuleType = models.CharField(
+        max_length=11, choices=WAGON_TYPE_CHOICES, default='SelectType', null=True, blank=True)
     Wagon2Number = models.BigIntegerField(null=True, blank=True)
-    Wagon2Type = models.CharField(
-        max_length=11, choices=WAGON_TYPE_CHOICES, default='SelectWagon', null=True, blank=True)
+    
     Wagon3Number = models.BigIntegerField(null=True, blank=True)
-    Wagon3Type = models.CharField(
-        max_length=11, choices=WAGON_TYPE_CHOICES, default='SelectWagon', null=True, blank=True)
+    
     Wagon4Number = models.BigIntegerField(null=True, blank=True)
-    Wagon4Type = models.CharField(
-        max_length=11, choices=WAGON_TYPE_CHOICES, default='SelectWagon', null=True, blank=True)
+    
     Wagon5Number = models.BigIntegerField(null=True, blank=True)
-    Wagon5Type = models.CharField(
-        max_length=11, choices=WAGON_TYPE_CHOICES, default='SelectWagon', null=True, blank=True)
+    
     ModuleCommDate = models.DateField(
         null=True, default='1001-01-01', blank=True)
     ModuleROHDate = models.DateField(
         null=True, default='1001-01-01', blank=True)
     ModulePOHDate = models.DateField(
         null=True, default='1001-01-01', blank=True)
-    Wagon1Defect = models.CharField(
-        max_length=100, null=True, blank=True)
-    Wagon2Defect = models.CharField(
-        max_length=100, null=True, blank=True)
-    Wagon3Defect = models.CharField(
-        max_length=100, null=True, blank=True)
-    Wagon4Defect = models.CharField(
-        max_length=100, null=True, blank=True)
-    Wagon5Defect = models.CharField(
-        max_length=100, null=True, blank=True)
-    ModuleDVS = models.BooleanField(default=False, blank=True)
-    ModuleDVR = models.BooleanField(default=False, blank=True)
-    ModuleDVSDate = models.DateField(null=True, blank=True)
+    Modified = models.BooleanField(default=False, blank=True)
     POHStation = models.CharField(max_length=100, null=True, blank=True)
     ROHStation = models.CharField(max_length=100, null=True, blank=True)
     author = models.ForeignKey(
@@ -66,7 +47,7 @@ class Module(models.Model):
         return str(self.ModuleName)
 
     def get_absolute_url(self):
-        return reverse('Modules_detail', kwargs={'pk': self.pk})
+        return reverse('Module_list')
 
     
 
@@ -114,21 +95,21 @@ class Rake(models.Model):
     def __str__(self):
         return self.RakeName
 
-    #def get_absolute_url(self):
-        #return reverse('post-detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('Rake_list')
 
-    def save(self, *args, **kwargs):
-        account_sid = "AC79222237cf68f0144f588d681e56907d"
+    #def save(self, *args, **kwargs):
+    #    account_sid = "AC79222237cf68f0144f588d681e56907d"
         # Your Auth Token from twilio.com/console
-        auth_token = "bee236c2075708556bd4e43049db5c05"
+    #    auth_token = "bee236c2075708556bd4e43049db5c05"
 
-        client = Client(account_sid, auth_token)
+    #    client = Client(account_sid, auth_token)
 
-        message = client.messages.create(
-            to="+919717631424",
-            from_="+15393027840",
-            body=f'Rake Name: {self.RakeName};')
+    #    message = client.messages.create(
+    #        to="+919717631424",
+    #        from_="+15393027840",
+    #        body=f'Rake Name: {self.RakeName};')
 
-        print(message.sid)
-        print("Module Saved !")
-        return super().save(*args, **kwargs)
+    #    print(message.sid)
+    #    print("Module Saved !")
+    #    return super().save(*args, **kwargs)
