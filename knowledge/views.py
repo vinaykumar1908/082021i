@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import ContractPost, ContractComment
-
+from knowledge.models import KPost, KComment
+from knowledge.forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -18,47 +18,39 @@ def homeView(request):
 @login_required
 def home(request):
     context = {
-        'posts': ContractPost.objects.all().order_by('-date_posted')
+        'posts': KPost.objects.all().order_by('-date_posted')
     }
-    return render(request, 'contracts/home.html', context)
+    return render(request, 'knowledge/home.html', context)
 
 
-class PostListView(UserPassesTestMixin, ListView):
-    model = ContractPost
-    template_name = "contracts/home.html"
+class PostListView(ListView):
+    model = KPost
+    template_name = "knowledge/home.html"
     context_object_name = 'posts'
     ordering = ['-date_posted']
 
-    def test_func(self):
-        print(self.request.user.Posted)
-        SCHEMES = ('TKD Administration','TKD Contract Office')
-        return self.request.user.Posted.startswith(SCHEMES)
-
-    def handle_no_permission(self):
-        response = redirect('home')
-        return response
 
 class UserPostListView(ListView):
-    model = ContractPost
-    template_name = 'contracts/user_posts.html'  # <app>/<model>_<viewtype>.html
+    model = KPost
+    template_name = 'knowledge/user_posts.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     paginate_by = 5
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return ContractPost.objects.filter(author=user).order_by('-date_posted')
+        return KPost.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
-    model = ContractPost
+    model = KPost
     context_object_name = 'post'
-    template_name = 'contracts/post_detail.html'
+    template_name = 'knowledge/post_detail.html'
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-    model = ContractPost
+    model = KPost
     fields = ['title', 'content', 'upload']
-    template_name = 'contracts/post_form.html'
+    template_name = 'knowledge/post_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -66,7 +58,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = ContractPost
+    model = KPost
     fields = ['title', 'content', 'upload']
 
     def form_valid(self, form):
@@ -81,7 +73,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = ContractPost
+    model = KPost
     success_url = '/Contracts/'
     
 
@@ -106,14 +98,14 @@ def add_comment_to_post(request, pk):
             comment.post = post
             comment.approve()
             comment.save()
-            return redirect('cpost-detail', pk=comment.post.pk)
+            return redirect('kpost-detail', pk=comment.post.pk)
     else:
         form = CommentForm()
-    return render(request, 'contracts/add_comment_to_post.html', {'form': form})
+    return render(request, 'knowledge/add_comment_to_post.html', {'form': form})
 
 
 @login_required
 def comment_remove(request, pk):
     comment = get_object_or_404(ContractComment, pk=pk)
     comment.delete()
-    return redirect('cpost-detail', pk=comment.post.pk)
+    return redirect('kpost-detail', pk=comment.post.pk)

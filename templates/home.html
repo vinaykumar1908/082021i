@@ -8,7 +8,7 @@ Home
 
 {%block content%}
 
-
+{%if user.Posted == 'TKD Administration'%}
 
 <h4 style="font-family: 'Times New Roman'; font-style: italic;">Time: {{time}}</h4>
 <div class="container-fluid">
@@ -20,14 +20,13 @@ Home
         <table class="table table-bordered ">
         <thead>
             <tr>
-                <th>No. of examinations this month</th>
-                <th>No. of examinations previous day</th>
-                <th>No. of examinations Today</th>
-                <th>No of Item Critical </th>
-                <th>ROH fitment modules this month</th>
-                 <th>Sickline fitment this month</th>               
-                <th>Cases related to EM Pad this month</th>
-                <th>Cases related to Adopter this month</th>
+                <th>No. of Module in Master</th>
+                <th>No. of Rakes in Master</th>
+                <th>No. of CC Examinations Yesterday</th>
+                <th>Average CC Delay</th>
+                <th>No. of CC Examinations Yesterday</th>
+                 <th>Average CC Delay</th>               
+                
 
 
             </tr>
@@ -36,17 +35,8 @@ Home
         <tbody>
         
             <tr class='danger'>
-                <td class='text-primary'>{{obj4.count}}</td>
-                <td class='text-primary'>{{objx.count}}</td>
-                <td class='text-primary'>{{objx1.count}}</td>
                 <td class='text-primary'>{{obj.count}}</td>
-                <td class='text-primary'><a href="">{{obj7.count}}</td>
-                <td class='text-primary'><a href="">{{obj8.count}}</td>
-
-                <td class='text-primary'><a href="">{{obj5.count}} Wagon/s</td>
-                <td class='text-primary'><a href="">{{obj6.count}} Wagon/s</td>
-
-                
+                <td class='text-primary'>{{obj2.count}}</td>
             </tr>
         
        
@@ -56,6 +46,7 @@ Home
     </div >
 
 </div>
+{%endif %}
 <!--
 <div class="row" style="background-color: teal; overflow-x:auto;">
     <div class="">

@@ -55,19 +55,20 @@ MOdule List
         <thead>
             <tr>    
                 <th>S.No</th>
-                
+                <th>Date</th>
                 <th>Module Name</th>
                 <th>Modified</th>
                 
               
                 <th>Checked By</th>
+                
             </tr>
         </thead>
         {%for object in object_list%}
         <tbody>
             <tr class='danger'>
                 <td class='text-primary'>{{forloop.counter}}</td>
-                
+                <td class='text-primary'>{{object.Date}}</td>
                 <td class='text-primary'><a href="{%url 'Module_detail' object.pk %}" target="_blank">{{object.ModuleName}}</a></td> 
                 <td class='text-primary'>{{object.Modified}}</td>
                 

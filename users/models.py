@@ -35,7 +35,7 @@ class Profile(AbstractUser):
     LocalAddress = models.TextField(null=True, blank=True)
     IDNumber = models.CharField(max_length=30, default='ID Number', null=True)
     Designation = models.CharField(max_length=30, default='JE/C&W/TKD', null=True, blank=True)
-    Posted = models.CharField(max_length=30, choices=PlaceOfPosting, default='TKD Administration', null=True, blank=True)
+    Posted = models.CharField(max_length=30, choices=PlaceOfPosting, default='TKD Tech Cell Office', null=True, blank=True)
     DateOfJoining = models.DateField(null=True, default='1001-01-01', blank=True)
 
     def __str__(self):

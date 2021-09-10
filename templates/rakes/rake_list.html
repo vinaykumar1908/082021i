@@ -54,7 +54,7 @@ Rake List
         <thead>
             <tr>    
                 <th>S.No</th>
-                
+                <th>Date</th>
                 <th>Rake Name</th>
                 <th>Rake Base</th>
                 
@@ -66,7 +66,7 @@ Rake List
         <tbody>
             <tr class='danger'>
                 <td class='text-primary'>{{forloop.counter}}</td>
-                
+                <td class='text-primary'>{{object.Date}}</td>
                 <td class='text-primary'><a href="{%url 'Rake_detail' object.pk %}" >{{object.RakeName}}</a></td> 
                 <td class='text-primary'>{{object.RakeBase}}</td>
                 

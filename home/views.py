@@ -20,6 +20,7 @@ from django.utils import timezone
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from rakes import models as RM
 
 
 @login_required
@@ -34,24 +35,14 @@ class SuccessPageView(TemplateView):
 
 @login_required
 def homeView(request):
-    qs = SM.registerCurrentStock.objects.all()
-
-
-    HM.p.objects.all().delete()
-    qs1 = HM.p.objects.all()
-    for l in qs:
+    qs = RM.Module.objects.all()
         
-        x = SM.registerCurrentStock.objects.get(id=l.id)
-        
-        y = HM.p.objects.create(id=x.id, Item=x.Item, AAC=x.AAC, Stock=x.Stock, updateTime=x.updateTime, PL_Number=x.PL_Number)
-        y.MACfun()
-        y.criticalFun()
-        y.save()
         
 
-    qs1 = HM.p.filterCriticalFun(request)
-    qs1 = qs1.order_by('Stock')
+    qs1 = RM.Rake.objects.all()
+
     j = timezone.now()
+
     #t = ZM.ModuleRecieved.objects.filter(ModuleRecieveDate__month=(j.month))
     #rs = t.filter(Q(ModuleDVS=True) & Q(ModuleMadeFit=False)).order_by("-ModuleRecieveDate")
     #rs1 = t.filter(Q(ModuleDVR=True) & Q(ModuleMadeFit=False)).order_by("-ModuleRecieveDate")
@@ -79,19 +70,8 @@ def homeView(request):
     #print(l)
 
     context = {
-        'obj': qs1,
+        'obj': qs,
         'obj2': qs1,
-        'obj3': qs1,
-        
-        'obj4': qs1,
-        'obj5': qs1,
-        'obj6': qs1,
-        'obj7': qs1,
-        'obj8': qs1,
-        'time': qs1,
-        'objx': qs1,
-        'objx1': qs1,
-
-
+        'time': j,
     }
     return render(request, 'home.html', context)

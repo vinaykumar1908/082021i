@@ -19,3 +19,5 @@ def home(request):
 class detail(DetailView):
     model = User
     template_name = 'emp/profile.html'
+    
+

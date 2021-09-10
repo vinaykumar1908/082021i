@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'mnp.apps.MnpConfig',
     'contracts.apps.ContractsConfig',
     'rakes.apps.RakesConfig',
+    'knowledge.apps.KnowledgeConfig',
 
 ]
 
