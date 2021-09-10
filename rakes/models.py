@@ -65,7 +65,7 @@ class Rake(models.Model):
         ("PNP_BMDJ", "PNP BMDJ"),
         ("PNP_PCWD_DWNA", "PNP PCWD DWNA"),
     )
-    RakeName = models.CharField(max_length=100, unique=True, null=True)
+    RakeName = models.CharField(max_length=100, unique=True, default='Error')
     Date = models.DateTimeField(default=timezone.now, null=True, blank=True)
     RakeBase = models.CharField(
         max_length=15, choices=RAKE_BASE_LIST, default='TKD_ICD', null=True, blank=True)

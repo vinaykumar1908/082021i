@@ -1,0 +1,10 @@
+sudo systemctl restart nginx
+sudo systemctl restart gunicorn
+
+
+git add .
+git commit -m ""
+git push
+
+cd django/082021i
+source dj/bin/activate
