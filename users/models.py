@@ -16,6 +16,9 @@ class Profile(AbstractUser):
     PlaceOfPosting = (
         ("TKD Sickline Office", "TKD Sickline Office"),
         ("TKD ROH Office", "TKD ROH"),
+        ("TKD Contract Office", "TKD Contract Office"),
+        ("TKD Tech Cell Office", "TKD Tech Cell Office"),
+        ("TKD OMRS Office", "TKD OMRS Office"),
         ("TKD SSE Planning Office", "TKD SSE Planning Office"),
         ("TKD M&P Section", "TKD M&P Section"),
         ("TKD Administration", "TKD Administration"),

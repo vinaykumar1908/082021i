@@ -1,11 +1,12 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import ContractPost, ContractComment
-from .forms import CommentForm
-from django.contrib.auth.models import User
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your views here.
 
 
@@ -30,7 +31,7 @@ class PostListView(UserPassesTestMixin, ListView):
 
     def test_func(self):
         print(self.request.user.Posted)
-        SCHEMES = ('TKD Administration')
+        SCHEMES = ('TKD Administration','TKD Contract Office')
         return self.request.user.Posted.startswith(SCHEMES)
 
     def handle_no_permission(self):

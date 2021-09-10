@@ -11,8 +11,8 @@
         {% if object.author == user %}
           
           <div class='row'>
-            <a class="btn btn-success btn-lg mt-1 mb-1  col-sm" href="{% url 'mnppost-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-lg mt-1 mb-1 col-sm" href="{% url 'mnppost-delete' object.id %}">Delete</a>
+            <a class="btn btn-success btn-lg mt-1 mb-1  col-sm" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-lg mt-1 mb-1 col-sm" href="{% url 'post-delete' object.id %}">Delete</a>
           </div>
         {% endif %}
       </div>

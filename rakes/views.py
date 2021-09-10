@@ -149,7 +149,7 @@ def AddRake(request):
             Module8=q.filter(
                 ModuleName__iexact=request.POST.get('M8')).first(),
             Module9=q.filter(
-                ModuleName__iexact=request.POST.get('M9')).first())
+                ModuleName__iexact=request.POST.get('M9')).first(), author=request.user)
         if newRake:
             newRake.save()
             message = messages.success(request, "Rake Added ")
