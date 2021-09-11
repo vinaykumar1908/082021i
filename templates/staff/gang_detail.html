@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Gang Details-{{ object.GangName }} - {{ object.Date}}
+{% endblock title %}
+
+{% block content %} 
+<h3 style="font-family: 'Courier New'; font-style: italic;"> Gang: {{object.GangName}} </h3>
+<div> 
+    <a class="btn btn-success" href="{%url 'Gang_list'%}"><h5> Back</h5></a> 
+    <a class="btn btn-success" href="{%url 'Gang_edit' object.pk%}"><h5> Edit Entry</h5></a>
+</div>
+<div class="book-detail">
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Gang Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.GangName}}</td>
+            </tr>
+        </tbody>
+</div> 
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Member 1 Name</th>
+            <th>Member 2 Name</th>
+            <th>Member 3 Name</th>
+            <th>Member 4 Name</th>
+            <th>Member 5 Name</th>
+            <th>Member 6 Name</th>
+            <th>Member 7 Name</th>
+            <th>Member 8 Name</th>
+            <th>Member 9 Name</th>
+            <th>Member10 Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{%if object.M1 != None %}<a href="{%url 'Staff_detail' object.M1.pk %}" target="_blank">{{object.M1}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M2 != None %}<a href="{%url 'Staff_detail' object.M2.pk %}" target="_blank">{{object.M2}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M3 != None %}<a href="{%url 'Staff_detail' object.M3.pk %}" target="_blank">{{object.M3}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M4 != None %}<a href="{%url 'Staff_detail' object.M4.pk %}" target="_blank">{{object.M4}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M5 != None %}<a href="{%url 'Staff_detail' object.M5.pk %}" target="_blank">{{object.M5}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M6 != None %}<a href="{%url 'Staff_detail' object.M6.pk %}" target="_blank">{{object.M6}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M7 != None %}<a href="{%url 'Staff_detail' object.M7.pk %}" target="_blank">{{object.M7}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M8 != None %}<a href="{%url 'Staff_detail' object.M8.pk %}" target="_blank">{{object.M8}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M9 != None %}<a href="{%url 'Staff_detail' object.M9.pk %}" target="_blank">{{object.M9}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+                <td class='text-primary'>{%if object.M10 != None %}<a href="{%url 'Staff_detail' object.M10.pk %}" target="_blank">{{object.M10}}{%else%}<p>Not Available</p>{%endif%}</a></td>
+
+            </tr>
+        </tbody>
+    
+
+</div>
+
+
+      
+      
+{% endblock content %}

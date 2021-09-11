@@ -76,14 +76,27 @@
                 <li><a href="{%url 'empHome'%}">Member Details</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Rakes <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{%url 'Rakes_entry'%}">Module and Rakes Entry</a></li>
-                    <li><a href="{%url 'Module_list'%}">Modules List</a></li>
-                    <li><a href="{%url 'Rake_list'%}">Rakes List</a></li>
+                    <li><a href="{%url 'AddModule'%}">Modules Entry and List</a></li>
+                    <li><a href="{%url 'Rake_list'%}">Rakes Entry and List</a></li>
+
+                  </ul>
+                </li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Staff <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'AddStaff'%}">Staff Entry and List</a></li>
+                    <li><a href="{%url 'Gangs_entry'%}">Gang Entry and List</a></li>
 
                   </ul>
                 </li>
                 
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Examinations <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                  <li><a href="{%url 'CC_home'%}">Closed Circuit</a></li>
+                    <li><a href="{% url 'STR_home'%}">Safe To Run</a></li>
+                    
 
+                  </ul>
+                </li>
               </ul>
               <form class="navbar-form navbar-left" action="#">
                 <div class="form-group">

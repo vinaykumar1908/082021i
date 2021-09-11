@@ -1,0 +1,105 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{%block title%}
+Staff List
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Staff List</h1>
+<h4>Click on Staff Name for more details</h4>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm"> 
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <a class="btn btn-success" href="{%url 'home'%}"><h5> Back </h5></a>
+    
+
+    
+</div>
+
+<div class="col-sm" >
+<h4> Search Control </h4>
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <!-- <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a> -->
+    <form method="POST" action="{%url 'StaffDetailLink2'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group ", id="StaffName" name="StaffName"  style="background-color: white; color:black" placeholder="Search By Staff" aria-label="Search By Staff" >
+            <script>
+            $( "#staffName" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" >
+    </form>
+    
+</div>
+</div>
+</div>
+<form method="POST" action="{%url 'AddStaff'%}">
+{% csrf_token %}
+
+<div class="col-sm-4 w-50 center2">
+<h3 >Add Staff</h3>
+{{form5|crispy}}
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.No</th>
+                <th>Staff Name</th>
+                <th>Designation</th>
+                <th>Mobile Number</th>
+                
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'><a href="{%url 'Staff_detail' object.pk %}" target="_blank">{{object.StaffName}}</a></td> 
+                <td class='text-primary'>{{object.Designation}}</td>
+                
+                <td class='text-primary'>{{object.StaffMobileNumber}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+{%endblock content%}
+
+{% block afterbody %}
+<script>
+            $( "#staffName" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script>
+
+{% endblock afterbody %}

@@ -1,0 +1,103 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Gang List
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Gang List</h1>
+<h4>Click on Rake Name for more details</h4>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm"> 
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <a class="btn btn-success" href="{%url 'home'%}"><h5> Back </h5></a>
+
+
+    
+</div>
+
+<div class="col-sm" >
+<h4> Search Control </h4>
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <!-- <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a> -->
+    <form method="POST" action="{%url 'StaffDetailLink3'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group ", id="staffName" name="staffName"  style="background-color: white; color:black" placeholder="Search By Staff Name" aria-label="Search By Staff Name" >
+            <script>
+            $( "#StaffName" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" >
+    </form>
+    <form method="POST" action="{%url 'GangDetailLink2'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group", id="GangName" name="GangName"  style="background-color: white; color:black" placeholder="Search By Gang" aria-label="Search By Gang">
+            <script>
+            $( "#GangName" ).autocomplete({
+              source: '{%url 'GangDetailLink3'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" />
+    </form>
+</div>
+</div>
+</div>
+
+
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.No</th>
+                <th>Gang Name</th>
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                
+                <td class='text-primary'><a href="{%url 'Gang_detail' object.pk %}" >{{object.GangName}}</a></td> 
+                
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+{%endblock content%}
+
+{% block afterbody %}
+<script>
+            $( "#staffName" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script>
+
+{% endblock afterbody %}

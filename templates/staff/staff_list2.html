@@ -1,0 +1,153 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{%block title%}
+Staff List
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Staff List</h1>
+<h4>Click on Staff Name for more details</h4>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm"> 
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <a class="btn btn-success" href="{%url 'home'%}"><h5> Back </h5></a>
+    
+
+    
+</div>
+
+<div class="col-sm" >
+<h4> Search Control </h4>
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <!-- <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a> -->
+    <form method="POST" action="{%url 'StaffDetailLink2'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group ", id="StaffName" name="StaffName"  style="background-color: white; color:black" placeholder="Search By Staff" aria-label="Search By Staff" >
+            <script>
+            $( "#staffName" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" >
+    </form>
+    
+</div>
+</div>
+</div>
+<form method="POST" action="{%url 'AddStaff'%}">
+{% csrf_token %}
+
+
+<h3 >Add Staff</h3>
+    <input type="text",class="form-control", id="StaffName" name="StaffName"  style="background-color: white; color:black" placeholder="Enter Staff Name" aria-label="Enter Staff Name" >
+    <input type="number",class="form-control form-group ", id="StaffMobileNumber" name="StaffMobileNumber"  style="background-color: white; color:black" placeholder="Staff Mobile Number" aria-label="Staff Mobile Number" >            
+    <input type="text",class="form-control", id="StaffToken" name="StaffToken"  style="background-color: white; color:black" placeholder="Enter Token Number" aria-label="Enter Token Number" >
+
+    <input type="text",class="form-control form-group ", id="StaffAddress" name="StaffAddress"  style="background-color: white; color:black" placeholder="Staff Address" aria-label="Staff Address" >
+            
+    <input type="text",class="form-control form-group ", id="DateOfJoining" name="DateOfJoining"  style="background-color: white; color:black" placeholder="Enter Date Of Joining" aria-label="Enter Date Of Joining" >
+        <script>
+              $( function() {
+              $( "#DateOfJoining" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+
+  <select id="Designation" name="Designation">
+    <option value="Tech-3">Tech-3 </option>
+    <option value="Tech-2">Tech-2 </option>
+        <option value="Tech-1">Tech-1 </option>
+
+        <option value="Sr.Tech">Sr.Tech </option>
+
+    <option value="MCM">MCM </option>
+    <option value="BVZI">BVZI </option>
+  </select>
+  <select id="Posted1" name="Posted1">
+    <option value="TKD_ACTL">TKD_ACTL </option>
+    <option value="TKD_HTPP_PWL">TKD_HTPP_PWL </option>
+    <option value="TKD_ICD">TKD_ICD </option>
+    <option value="TKD_YARD">TKD YARD </option>
+    <option value="TKD_ROH1">TKD ROH1 </option>
+    <option value="TKD_ROH2">TKD ROH2 </option>
+    <option value="TKD_Sickline">TKD Sickline </option>
+    <option value="TKD_Store">TKD Store </option>
+    <option value="TKD_MnP">TKD MnP </option>
+    <option value="TKD_TechCell">TKD Tech Cell </option>
+  </select>
+<br>
+  
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Staff Name</th>
+                <th>Staff Token Number</th>
+                <th>Staff Mobile Number</th>
+                <th>Designation</th>
+                <th>Posted</th>
+                <th>Date Of Joining</th>
+                
+              
+                
+                
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'><a href="{%url 'Staff_detail' object.pk %}" target="_blank">{{object.StaffName}}</a></td> 
+                <td class='text-primary'>{{object.StaffToken}}</td>
+                <td class='text-primary'>{{object.StaffMobileNumber}}</td>
+                <td class='text-primary'>{{object.Designation}}</td>
+                <td class='text-primary'>{{object.Posted}}</td>
+                <td class='text-primary'>{{object.DateOfJoining}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+{%endblock content%}
+
+{% block afterbody %}
+<script>
+            $( "#moduleName" ).autocomplete({
+              source: '{%url 'moduleName'%}'
+                });
+            </script>
+
+{% endblock afterbody %}

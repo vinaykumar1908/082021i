@@ -29,6 +29,7 @@ class RakeListView(LoginRequiredMixin, ListView):
     model = Rake
     context_object_name = 'post'
     template_name = 'rakes/rake_list.html'
+    ordering = ['-Date']
     paginate_by = 20
 
 
@@ -75,60 +76,50 @@ class RakeDetailView(LoginRequiredMixin, DetailView):
 
 @login_required
 def AddModule(request):
-    form5 = ModuleForm()
-    form6 = RakeForm()
-    context = {
-        'form5': form5,
-        'form6': form6,
-    }
+    q = Module.objects
+    p = Rake.objects
     if request.method == 'POST':
-        print("******request.post1*******")
-        print(request.POST)
-        print(request.user)
-        form = ModuleForm(request.POST)
-        
-        print(form)
-       # form.author = request.user
-        #print(form.author)
-        if form.is_valid():
-            print("form is true")
-            M = form.cleaned_data['ModuleName']
-            W1 = form.cleaned_data['Wagon1Number']
-            W2 = form.cleaned_data['Wagon2Number']
-            W3 = form.cleaned_data['Wagon3Number']
-            W4 = form.cleaned_data['Wagon4Number']
-            W5 = form.cleaned_data['Wagon5Number']
+        newModule = Module(
+            ModuleName=request.POST.get('ModuleName'),
+            Wagon1Number=request.POST.get('W1'),
+            Wagon2Number=request.POST.get('W2'),
+            Wagon3Number=request.POST.get('W3'),
+            Wagon4Number=request.POST.get('W4'),
+            Wagon5Number=request.POST.get('W5'),
+            ModuleROHDate=request.POST.get('ROHDate'),
+            ModulePOHDate=request.POST.get('POHDate'),
+            ModuleType=request.POST.get('ModuleType'),
+            Modified=request.POST.get('fav_language'),
+            author=request.user)
+        newModule.save()
+        l = Module.objects.all().order_by('-Date')
+        message = messages.success(request, "Module Added ")
 
-            added = Module(
-                Date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), ModuleName=M,
-                Wagon1Number=W1, Wagon2Number=W2, Wagon3Number=W3, Wagon4Number=W4, Wagon5Number=W5, author=request.user)
-            print(added)
-            added.save()
-            message = messages.success(request, "Module Added Successfully ")
-        if not form.is_valid():
-            message = messages.warning(request, "Module Not Added ")
-            print("ERROR")
-        form5 = ModuleForm()
+        form6 = ModuleForm()
         context = {
             'messages': message,
-            'form5': form5,
+            'object_list': l,
             'form6': form6,
-
         }
+        print('successful')
+        return render(request, 'rakes/module_list.html', context)
 
-        return render(request, 'rakes/rake_entry_form.html', context)
-        print('MPOST request accepted')
-        pass
-    print("MPOST Request bypassed")
-    return render(request, 'rakes/rake_entry_form.html', context)
-
+    else:
+        message = messages.warning(request, "Module Not Added ")
+    form5 = ModuleForm()
+    form6 = RakeForm()
+    l = Module.objects.all().order_by('-Date')
+    context = {
+        'messages': message,
+        'object_list': l,
+        'form6': form6
+    }
+    return render(request, 'rakes/module_list.html', context)
 
 @login_required
 def AddRake(request):
-    
     q = Module.objects
     p = Rake.objects
-    
     if request.method == 'POST':
         newRake = Rake(
             RakeName=request.POST.get('RakeName'),
@@ -149,36 +140,33 @@ def AddRake(request):
             Module8=q.filter(
                 ModuleName__iexact=request.POST.get('M8')).first(),
             Module9=q.filter(
-                ModuleName__iexact=request.POST.get('M9')).first(), author=request.user)
-        if newRake:
-            newRake.save()
-            message = messages.success(request, "Rake Added ")
-            form5 = ModuleForm()
-            form6 = RakeForm()
-            context = {
-                'messages': message,
-                'form5': form5,
-                'form6': form6
-            }
-            return render(request, 'rakes/rake_entry_form.html', context)
-        else:
-            message = messages.warning(request, "Rake Not Added ")
-        form5 = ModuleForm()
+                ModuleName__iexact=request.POST.get('M9')).first(),
+            RakeBase=request.POST.get('Base'), author=request.user)
+        newRake.save()
+        l = Rake.objects.all().order_by('-Date')
+        message = messages.success(request, "Rake Added ")
+
         form6 = RakeForm()
         context = {
             'messages': message,
-            'form5': form5,
-            'form6': form6
+            'object_list': l,
+            'form6': form6,
         }
-        return render(request, 'rakes/rake_entry_form.html', context)
+        print('successful')
+        return render(request, 'rakes/rake_list.html', context)
+
+    else:
+        message = messages.warning(request, "Rake Not Added ")
     form5 = ModuleForm()
     form6 = RakeForm()
+    l = Rake.objects.all().order_by('-Date')
     context = {
-        
-        'form5': form5,
+        'messages': message,
+        'object_list': l,
         'form6': form6
     }
-    return render(request, 'rakes/rake_entry_form.html', context)
+    return render(request, 'rakes/rake_list.html', context)
+    
 
 
 

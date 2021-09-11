@@ -12,16 +12,13 @@ Rake List
 <h4>Click on Rake Name for more details</h4>
 
 <div class="container-fluid">
-<div class="row">
-<div class="col-sm"> 
+<div class="col">
+<div class="row-sm"> 
     <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
-    <a class="btn btn-success" href="{%url 'home'%}"><h5> Back </h5></a>
-
-
-    
+    <a class="btn btn-success" href="{%url 'home'%}"><h5> Back </h5></a>   
 </div>
 
-<div class="col-sm" >
+<div class="row-sm" >
 <h4> Search Control </h4>
     <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
     <!-- <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a> -->
@@ -45,11 +42,90 @@ Rake List
             </script> 
     <input type="submit" value="GO" style="background-color: lightcoral; color:black" />
     </form>
-</div>
+
+<form method="POST" action="{%url 'Rakes_entry'%}">
+{% csrf_token %}
+
+
+<h3 >Add Rake</h3>
+    <input type="text",class="form-control form-group ", id="RakeName" name="RakeName"  style="background-color: white; color:black" placeholder="Enter Rake Name" aria-label="Enter Rake Name" >
+    <br>
+    <input type="text",class="form-control form-group ", id="M1" name="M1"  style="background-color: white; color:black" placeholder="Enter Module 1" aria-label="Enter Module 1" >
+            <script>
+            $( "#M1" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M2" name="M2"  style="background-color: white; color:black" placeholder="Enter Module 2" aria-label="Enter Module 2" >
+            <script>
+            $( "#M2" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M3" name="M3"  style="background-color: white; color:black" placeholder="Enter Module 3" aria-label="Enter Module 3" >
+            <script>
+            $( "#M3" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M4" name="M4"  style="background-color: white; color:black" placeholder="Enter Module 4" aria-label="Enter Module 4" >
+            <script>
+            $( "#M4" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M5" name="M5"  style="background-color: white; color:black" placeholder="Enter Module 5" aria-label="Enter Module 5" >
+            <script>
+            $( "#M5" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M6" name="M6"  style="background-color: white; color:black" placeholder="Enter Module 6" aria-label="Enter Module 6" >
+            <script>
+            $( "#M6" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M7" name="M7"  style="background-color: white; color:black" placeholder="Enter Module 7" aria-label="Enter Module 7" >
+            <script>
+            $( "#M7" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M8" name="M8"  style="background-color: white; color:black" placeholder="Enter Module 8" aria-label="Enter Module 8" >
+            <script>
+            $( "#M8" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M9" name="M9"  style="background-color: white; color:black" placeholder="Enter Module 9" aria-label="Enter Module 9" >
+            <script>
+            $( "#M9" ).autocomplete({
+              source: '{%url 'autocomplete1'%}'
+                });
+            </script> 
+
+  <select id="Base" name="Base">
+    <option value="TKD_ACTL">TKD_ACTL </option>
+    <option value="TKD_HTPP_PWL">TKD_HTPP_PWL </option>
+    <option value="TKD_ICD">TKD_ICD </option>
+    <option value="TKD_YARD">TKD_YARD </option>
+  </select>
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
 </div>
 </div>
 
-
+<div style='center'>
 <table class="table table-bordered">
         <thead>
             <tr>    
@@ -57,9 +133,15 @@ Rake List
                 <th>Date</th>
                 <th>Rake Name</th>
                 <th>Rake Base</th>
-                
-              
-                <th>Checked By</th>
+                <th>Module 1</th>
+                <th>Module 2</th>
+                <th>Module 3</th>
+                <th>Module 4</th>
+                <th>Module 5</th>
+                <th>Module 6</th>
+                <th>Module 7</th>
+                <th>Module 8</th>
+                <th>Module 9</th>
             </tr>
         </thead>
         {%for object in object_list%}
@@ -69,8 +151,15 @@ Rake List
                 <td class='text-primary'>{{object.Date}}</td>
                 <td class='text-primary'><a href="{%url 'Rake_detail' object.pk %}" >{{object.RakeName}}</a></td> 
                 <td class='text-primary'>{{object.RakeBase}}</td>
-                
-                <td class='text-primary'>{{object.author}}</td>
+                <td class='text-primary'>{{object.Module1}}</td>
+                <td class='text-primary'>{{object.Module2}}</td>
+                <td class='text-primary'>{{object.Module3}}</td>
+                <td class='text-primary'>{{object.Module4}}</td>
+                <td class='text-primary'>{{object.Module5}}</td>
+                <td class='text-primary'>{{object.Module6}}</td>
+                <td class='text-primary'>{{object.Module7}}</td>
+                <td class='text-primary'>{{object.Module8}}</td>
+                <td class='text-primary'>{{object.Module9}}</td>
             </tr>
         </tbody>
         {%endfor%}
@@ -98,6 +187,7 @@ Rake List
 
 {% endif %}
 </div>
+</div)
 {%endblock content%}
 
 {% block afterbody %}

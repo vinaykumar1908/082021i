@@ -1,0 +1,205 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Gang List
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Gang List</h1>
+<h4>Click on Gang Name for more details</h4>
+
+<div class="container-fluid">
+<div class="col">
+<div class="row-sm"> 
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <a class="btn btn-success" href="{%url 'home'%}"><h5> Back </h5></a>   
+</div>
+
+<div class="row-sm" >
+<h4> Search Control </h4>
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <!-- <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a> -->
+    <form method="POST" action="{%url 'StaffDetailLink3'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group ", id="staffName" name="staffName"  style="background-color: white; color:black" placeholder="Search By Staff Name" aria-label="Search By Staff Name" >
+            <script>
+            $( "#StaffName" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" >
+    </form>
+    
+
+<form method="POST" action="{%url 'Gangs_entry'%}">
+{% csrf_token %}
+
+
+<h3 >Add Gang</h3>
+    <input type="text",class="form-control form-group ", id="GangName" name="GangName"  style="background-color: white; color:black" placeholder="Enter Gang Name" aria-label="Enter Gang Name" >
+    <br>
+    <input type="text",class="form-control form-group ", id="M1" name="M1"  style="background-color: white; color:black" placeholder="Enter Member 1" aria-label="Enter Member 1" >
+            <script>
+            $( "#M1" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M2" name="M2"  style="background-color: white; color:black" placeholder="Enter Member 2" aria-label="Enter Member 2" >
+            <script>
+            $( "#M2" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M3" name="M3"  style="background-color: white; color:black" placeholder="Enter Member 3" aria-label="Enter Member 3" >
+            <script>
+            $( "#M3" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M4" name="M4"  style="background-color: white; color:black" placeholder="Enter Member 4" aria-label="Enter Member 4" >
+            <script>
+            $( "#M4" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M5" name="M5"  style="background-color: white; color:black" placeholder="Enter Member 5" aria-label="Enter Member 5" >
+            <script>
+            $( "#M5" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M6" name="M6"  style="background-color: white; color:black" placeholder="Enter Member 6" aria-label="Enter Member 6" >
+            <script>
+            $( "#M6" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M7" name="M7"  style="background-color: white; color:black" placeholder="Enter Member 7" aria-label="Enter Member 7" >
+            <script>
+            $( "#M7" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M8" name="M8"  style="background-color: white; color:black" placeholder="Enter Member 8" aria-label="Enter Member 8" >
+            <script>
+            $( "#M8" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+            
+    <input type="text",class="form-control form-group ", id="M9" name="M9"  style="background-color: white; color:black" placeholder="Enter Member 9" aria-label="Enter Member 9" >
+            <script>
+            $( "#M9" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script> 
+    <input type="text",class="form-control form-group ", id="M10" name="M10"  style="background-color: white; color:black" placeholder="Enter Member 10" aria-label="Enter Member 10" >
+            <script>
+            $( "#M10" ).autocomplete({
+              source: '{%url 'staffName'%}'
+                });
+            </script>
+  <select id="Posted2" name="Posted2">
+    <option value="TKD_ACTL">TKD ACTL </option>
+    <option value="TKD_HTPP_PWL">TKD HTPP PWL </option>
+    <option value="TKD_ICD">TKD ICD </option>
+    <option value="TKD_YARD">TKD YARD </option>
+    <option value="TKD_ROH1">TKD ROH1 </option>
+    <option value="TKD_ROH2">TKD ROH2 </option>
+    <option value="TKD_Sickline">TKD Sickline </option>
+    <option value="TKD_Store">TKD Store </option>
+    <option value="TKD_MnP">TKD MnP </option>
+    <option value="TKD_TechCell">TKD Tech Cell </option>
+  </select>
+  
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+</div>
+</div>
+
+<div style='center'>
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Gang Name</th>
+                <th>Posted</th>
+                <th>Member 1</th>
+                <th>Member 2</th>
+                <th>Member 3</th>
+                <th>Member 4</th>
+                <th>Member 5</th>
+                <th>Member 6</th>
+                <th>Member 7</th>
+                <th>Member 8</th>
+                <th>Member 9</th>
+                <th>Member 10</th>
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'><a href="{%url 'Gang_detail' object.pk %}" >{{object.GangName}}</a></td> 
+                <td class='text-primary'>{{object.GPosted}}</td>
+                <td class='text-primary'>{{object.M1}}</td>
+                <td class='text-primary'>{{object.M2}}</td>
+                <td class='text-primary'>{{object.M3}}</td>
+                <td class='text-primary'>{{object.M4}}</td>
+                <td class='text-primary'>{{object.M5}}</td>
+                <td class='text-primary'>{{object.M6}}</td>
+                <td class='text-primary'>{{object.M7}}</td>
+                <td class='text-primary'>{{object.M8}}</td>
+                <td class='text-primary'>{{object.M9}}</td>
+                <td class='text-primary'>{{object.M10}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+</div)
+{%endblock content%}
+
+{% block afterbody %}
+<script>
+            $( "#moduleName" ).autocomplete({
+              source: '{%url 'moduleName'%}'
+                });
+            </script>
+
+{% endblock afterbody %}

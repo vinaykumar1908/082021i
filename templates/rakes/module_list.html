@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-
+{% load crispy_forms_tags %}
 
 {%block title%}
 MOdule List
@@ -49,18 +49,81 @@ MOdule List
 </div>
 </div>
 </div>
+<form method="POST" action="{%url 'AddModule'%}">
+{% csrf_token %}
 
 
+<h3 >Add Module</h3>
+    <input type="text",class="form-control", id="ModuleName" name="ModuleName"  style="background-color: white; color:black" placeholder="Enter Module Name" aria-label="Enter Module Name" >
+    <input type="number",class="form-control form-group ", id="W1" name="W1"  style="background-color: white; color:black" placeholder="Enter Wagon 1" aria-label="Enter Wagon 1" >
+             
+            
+    <input type="number",class="form-control form-group ", id="W2" name="W2"  style="background-color: white; color:black" placeholder="Enter Wagon 2" aria-label="Enter Wagon 2" >
+            
+            
+    <input type="number",class="form-control form-group ", id="W3" name="W3"  style="background-color: white; color:black" placeholder="Enter Wagon 3" aria-label="Enter Wagon 3" >
+             
+            
+    <input type="number",class="form-control form-group ", id="W4" name="W4"  style="background-color: white; color:black" placeholder="Enter Wagon 4" aria-label="Enter Wagon 4" >
+             
+            
+    <input type="number",class="form-control form-group ", id="W5" name="W5"  style="background-color: white; color:black" placeholder="Enter Wagon 5" aria-label="Enter Wagon 5" >
+            
+    <input type="text",class="form-control form-group ", id="ROHDate" name="ROHDate"  style="background-color: white; color:black" placeholder="Enter ROH Date" aria-label="Enter ROH Date" >
+ 
+    <input type="text",class="form-control form-group ", id="POHDate" name="POHDate"  style="background-color: white; color:black" placeholder="Enter POH Date" aria-label="Enter POH Date" >
+        <script>
+              $( function() {
+              $( "#ROHDate" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+        <script>
+              $( function() {
+              $( "#POHDate" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+
+  <select id="ModuleType" name="ModuleType">
+    <option value="BLC">BLC </option>
+    <option value="BLL">BLL </option>
+        <option value="BLCM">BLCM </option>
+
+        <option value="BFKHN">BFKHN </option>
+
+    <option value="BVZC">BVZC </option>
+    <option value="BVZI">BVZI </option>
+  </select>
+<br>
+  <input type="radio" id="modified" name="fav_language" value="True">
+  <label for="modified">Modified</label>
+
+  <input type="radio" id="unmodified" name="fav_language" value="Fale">
+  <label for="unmodified">Unmodified</label><br>
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
 <table class="table table-bordered">
         <thead>
             <tr>    
                 <th>S.No</th>
                 <th>Date</th>
                 <th>Module Name</th>
+                <th>Wagon 1</th>
+                <th>Wagon 2</th>
+                <th>Wagon 3</th>
+                <th>Wagon 4</th>
+                <th>Wagon 5</th>
+                <th>ModuleType</th>
                 <th>Modified</th>
+                <th>ROH Date</th>
+                <th>POH Date</th>
                 
               
-                <th>Checked By</th>
+                
                 
             </tr>
         </thead>
@@ -70,9 +133,15 @@ MOdule List
                 <td class='text-primary'>{{forloop.counter}}</td>
                 <td class='text-primary'>{{object.Date}}</td>
                 <td class='text-primary'><a href="{%url 'Module_detail' object.pk %}" target="_blank">{{object.ModuleName}}</a></td> 
+                <td class='text-primary'>{{object.Wagon1Number}}</td>
+                <td class='text-primary'>{{object.Wagon2Number}}</td>
+                <td class='text-primary'>{{object.Wagon3Number}}</td>
+                <td class='text-primary'>{{object.Wagon4Number}}</td>
+                <td class='text-primary'>{{object.Wagon5Number}}</td>
+                <td class='text-primary'>{{object.ModuleType}}</td>
                 <td class='text-primary'>{{object.Modified}}</td>
-                
-                <td class='text-primary'>{{object.author}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ModulePOHDate}}</td>
             </tr>
         </tbody>
         {%endfor%}

@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+
+{% block head %}
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+{% endblock head %}
+{%block title%}
+STR - 24 hr Examinations Ticket System
+{%endblock title%}
+
+
+{%block content%}
+
+<h1 class="center">STR</h1>
+<div class='center'>
+        <li class="list-group-item"><a href="{%url 'CC_home'%}">STR Pre Examination</a></li>
+        <li class="list-group-item"><a href="{%url 'STR_home'%}">STR Examination</a></li>
+        <li class="list-group-item"><a href="{%url 'STR_home'%}">STR Post Examination</a></li>
+</div>
+
+
+{%endblock content%}

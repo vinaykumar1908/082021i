@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Staff Details {{ object.StaffName }} - {{ object.Date}}
+{% endblock title %}
+
+{% block content %} 
+<h3 style="font-family: 'Courier New'; font-style: italic;"> Staff: {{object.ModuleName}} </h3>
+<div> 
+    <a class="btn btn-success" href="{%url 'Staff_edit' object.pk%}"><h5> Edit Entry</h5></a>
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Staff Name </th>
+            <th>Staff Mobile Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.StaffName}}</td>
+                <td class='text-primary'>{{object.StaffMobileNumber}}</td>
+            </tr>
+        </tbody>
+    
+
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>Designation</th>
+            <th>Staff Address</th>
+            <th>Date Of Joining</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Designation}}</td>
+                <td class='text-primary'>{{object.StaffAddress}}</td>
+                <td class='text-primary'>{{object.DateOfJoining}}</td>
+            </tr>
+        </tbody>
+
+
+</div>
+
+
+
+      
+      
+{% endblock content %}

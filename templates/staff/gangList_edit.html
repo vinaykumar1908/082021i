@@ -1,0 +1,15 @@
+<!-- templates/post_edit.html --> 
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<h1>Edit Gang</h1> 
+<div> 
+    </div>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h4> Important! date format : YYYY-MM-DD</h4>
+    <h4> Important! date time format : YYYY-MM-DD HH:MM:SS</h4>  
+    <input class="btn btn-success" type="submit" value="Update" />
+    {{ form|crispy }} 
+</form> 
+{% endblock %}

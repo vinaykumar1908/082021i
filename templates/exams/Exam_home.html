@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{% block head %}
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+{% endblock head %}
+{%block title%}
+Examinations 
+{%endblock title%}
+
+
+{%block content%}
+
+<h1 class="center">24 hr Examinations Ticket System</h1>
+
+<div>
+        <li class="list-group-item"><a href="{%url 'CC_home'%}">CC</a></li>
+        <li class="list-group-item"><a href="{%url 'STR_home'%}">STR</a></li>
+</div>
+
+{%endblock content%}
