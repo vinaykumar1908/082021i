@@ -1,0 +1,66 @@
+{%extends 'base.html'%}
+
+{% block head %}
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+
+{# Include FontAwesome; required for icon display #}
+    
+
+
+ {% endblock head %}
+{%block title%}
+CC - 24 hr Examinations Ticket System
+{%endblock title%}
+
+
+{%block content%}
+
+<br>
+<br>
+
+<h1 class="center">CC Pre Exam</h1>
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>RakeName</th>
+                <th>OldBPCNumber</th>
+                <th>TKDInTime</th>
+                <th>YardInTime</th>
+                <th>SidingIn</th>
+                <th>UnloadingStart</th>
+                <th>T431IssueTime</th>
+                <th>T431ReceiveTime</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.RakeName}}</td>
+                <td class='text-primary'>{{object.OldBPCNumber}}</td>
+                <td class='text-primary'>{{object.TKDInTime}}</a></td> 
+                <td class='text-primary'>{{object.YardInTime}}</td>
+                <td class='text-primary'>{{object.SidingIn}}</td>
+                <td class='text-primary'>{{object.UnloadingStart}}</td>
+                <td class='text-primary'>{{object.T431IssueTime}}</a></td> 
+                <td class='text-primary'>{{object.T431ReceiveTime}}</td>
+
+                
+            </tr>
+        </tbody>
+       
+</table>
+{%endblock content%}
+{%block afterbody%}
+<!-- this should go after your </body> -->
+<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+<script src="/jquery.js"></script>
+<script src="/build/jquery.datetimepicker.full.min.js"></script>
+{%endblock afterbody%}

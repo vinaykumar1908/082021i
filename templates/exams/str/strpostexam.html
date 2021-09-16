@@ -1,0 +1,212 @@
+{%extends 'base.html'%}
+
+{% block head %}
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+
+{# Include FontAwesome; required for icon display #}
+    
+
+
+ {% endblock head %}
+{%block title%}
+STR - 24 hr Examinations Ticket System
+{%endblock title%}
+
+
+{%block content%}
+
+<br>
+<br>
+
+<h1 class="center">STR Post Exam</h1>
+<div class=' center container'>
+<div class=' row'>
+<div class=' col-sm'> 
+<form method="POST" action="{%url 'STRPostExam' object.Serial %}">
+{% csrf_token %}
+
+
+<h3 >Post STR Examination</h3>
+
+<div class='input-group date' id='datetimepicker1' >
+<input type='text' class="form-control form-group " name="LoadingStart" placeholder="Loading Start Date/Time " aria-label="Loading Start Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker1').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker2' >
+<input type='text' class="form-control form-group " name="LoadingEnd" placeholder="Loading End Date/Time " aria-label="Loading End Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker2').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker3' >
+<input type='text' class="form-control form-group " name="SidingOut" placeholder="Siding Date/Time " aria-label="Siding Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker3').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker4' >
+<input type='text' class="form-control form-group " name="YardOutTime" placeholder="Yard Out Date/Time " aria-label="Yard Out Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker4').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker5' >
+<input type='text' class="form-control form-group " name="TKDOutTime" placeholder="TKD Out Date/Time " aria-label="TKD Out Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker5').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+
+<input type="number",class="form-control form-group ", name="ROHDetachment"  style="background-color: white; color:black" placeholder="ROHDetachment" aria-label="ROHDetachment" >  
+<input type="number",class="form-control form-group ", name="POHDetachment"  style="background-color: white; color:black" placeholder="POHDetachment" aria-label="POHDetachment" >  
+<input type="number",class="form-control form-group ", name="DVSDetachment"  style="background-color: white; color:black" placeholder="DVSDetachment" aria-label="DVSDetachment" >  
+<input type="number",class="form-control form-group ", name="NewBPCNumber"  style="background-color: white; color:black" placeholder="NewBPCNumber" aria-label="NewBPCNumber" >  
+
+
+<input type='text' class="form-control form-group " id='datetimepicker6' name="NewBPCDate" placeholder="New BPC Date/Time " aria-label="New BPC Date/Time " />
+
+
+<script>
+              $( function() {
+              $( "#datetimepicker6" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+
+
+</div>
+   
+
+
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+</div>
+
+
+</div>
+<div class='container '>
+
+</div>
+<div class='container'>
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>RakeName</th>
+                <th>Date Time</th>
+                <th>LoadingStart</th>
+                <th>LoadingEnd</th>
+                <th>SidingOut</th>
+                <th>YardOutTime</th>
+                <th>TKDOutTime</th>
+                <th>ROHDetachment</th>
+                <th>POHDetachment</th>
+                <th>DVSDetachment</th>
+                <th>NewBPCNumber</th>
+                <th>NewBPCDate</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.RakeName}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.LoadingStart}}</td>
+                <td class='text-primary'>{{object.LoadingEnd}}</td>
+                <td class='text-primary'>{{object.SidingOut}}</td>
+                <td class='text-primary'>{{object.YardOutTime}}</a></td> 
+                <td class='text-primary'>{{object.TKDOutTime}}</td>
+                <td class='text-primary'>{{object.ROHDetachment}}</td>
+                <td class='text-primary'>{{object.POHDetachment}}</td>
+                <td class='text-primary'>{{object.DVSDetachment}}</a></td> 
+                <td class='text-primary'>{{object.NewBPCNumber}}</td>
+                <td class='text-primary'>{{object.NewBPCDate}}</td>
+                
+            </tr>
+        </tbody>
+       
+</table>
+</div>
+
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+</div)
+{%endblock content%}
+{%block afterbody%}
+<!-- this should go after your </body> -->
+<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+<script src="/jquery.js"></script>
+<script src="/build/jquery.datetimepicker.full.min.js"></script>
+{%endblock afterbody%}

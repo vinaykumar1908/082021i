@@ -3,8 +3,20 @@ from exams import views
 
 urlpatterns = [
     path('', views.ExamHomePageView.as_view(), name='Exams_home'),
-    path('STR/', views.STRHomePageView.as_view(), name='STR_home'),
-    path('CC/', views.CCHomePageView.as_view(), name='CC_home'),
+    path('STR/', views.STRHomePageView, name='STR_home'),
+    path('CC/', views.CCHomePageView, name='CC_home'),
+    path('CC/AddPreExam', views.AddPreExamDetails, name='PreExam'),
+    path('CC/AddExam/<int:Serial>', views.AddExamDetails, name='Exam'),
+    path('CC/AddPostExam/<int:Serial>', views.AddPostExamDetails, name='PostExam'),
+    path('CC/CCExamDetails/<int:Serial>',
+         views.ShowCCExamDetails, name='CCDetails'),
+    path('STR/AddSTRPreExam', views.AddSTRPreExamDetails, name='STRPreExam'),
+    path('STR/AddSTRExam/<int:Serial>', views.AddSTRExamDetails, name='STRExam'),
+    path('STR/AddSTRPostExam/<int:Serial>',
+         views.AddSTRPostExamDetails, name='STRPostExam'),
+    path('STR/STRExamDetails/<int:Serial>',
+         views.ShowSTRExamDetails, name='STRDetails'),
+
     #path('ModuleAutocomplete', views.autocomplete1, name='autocomplete1'),
     #path('AddModule', views.AddModule, name='AddModule'),
     #path('ShowRakes', views.RakeListView.as_view(), name='Rake_list'),

@@ -91,6 +91,7 @@ def AddModule(request):
             ModuleType=request.POST.get('ModuleType'),
             Modified=request.POST.get('fav_language'),
             author=request.user)
+        print(request.POST.get('fav_language'))
         newModule.save()
         l = Module.objects.all().order_by('-Date')
         message = messages.success(request, "Module Added ")

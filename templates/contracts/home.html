@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block head %}
 
 {% endblock head %}
@@ -20,6 +21,10 @@
             </div>
             <h2><a class="article-title text-white " href="{%url 'cpost-detail' post.id%}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
+            {% if post.upload %}
+            <img class="rounded-circle article-img"
+              style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px; float: left; margin-left: 100px " src="{% static "images/default.jpg" %}"/>
+            {% endif %}
 <a href="{% url 'cpost-detail' post.id %}">Comments: {{ post.approved_comments.count }}</a>
           </div>
         </article>

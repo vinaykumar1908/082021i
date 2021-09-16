@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+STR Details of {{ object.RakeName }} on Date {{ object.Date}}
+{% endblock title %}
+
+{% block content %} 
+<h3 style="font-family: 'Courier New'; font-style: italic;"> STR Rake: {{object.RakeName}} </h3>
+
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Serial</th>
+            <th>Date</th>
+            <th>RakeName</th>
+            <th>ExamPlace</th>
+            <th>Gang</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Serial}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'><a href="{%url 'Rake_detail' object.pk %}" >{{object.RakeName}}</a></td>
+                <td class='text-primary'>{{object.ExamPlace}}</td>
+                <td class='text-primary'><a href="{%url 'Gang_detail' object.Gang.pk %}" >{{object.Gang}}</a></td>
+            </tr>
+        </tbody>
+    
+
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>TKDInTime</th>  
+            <th>YardInTime</th>
+            <th>SidingIn</th>
+            <th>UnloadingStart</th>
+            <th>T431IssueTime</th>
+            <th>T431ReceiveTime</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.TKDInTime}}</td>
+                <td class='text-primary'>{{object.YardInTime}}</td>
+                <td class='text-primary'>{{object.SidingIn}}</td>
+                <td class='text-primary'>{{object.UnloadingStart}}</td>
+                <td class='text-primary'>{{object.T431IssueTime}}</td>
+                <td class='text-primary'>{{object.T431ReceiveTime}}</td>
+                    
+            </tr>
+        </tbody>
+
+
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>WorkStart</th>  
+            <th>WorkEnd</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.WorkStart}}</td>
+                <td class='text-primary'>{{object.WorkEnd}}</td>
+                
+                    
+            </tr>
+        </tbody>
+
+
+</div>
+
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>BrakeBlock</th>  
+            <th>Empad</th>
+            <th>AdopterChanged</th>
+            <th>AdopterCantt</th>
+            <th>SideBearerSpring</th>
+            <th>JawLinerWeld</th>
+                        <th>ATLRepair</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.BrakeBlock}}</td>
+                <td class='text-primary'>{{object.Empad}}</td>
+                <td class='text-primary'>{{object.AdopterChanged}}</td>
+                <td class='text-primary'>{{object.AdopterCantt}}</td>
+                <td class='text-primary'>{{object.SideBearerSpring}}</td>
+                <td class='text-primary'>{{object.JawLinerWeld}}</td>
+                                <td class='text-primary'>{{object.ATLRepair}}</td>
+
+                    
+            </tr>
+        </tbody>
+
+
+</div>
+
+
+      
+      
+{% endblock content %}

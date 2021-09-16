@@ -1,0 +1,164 @@
+{%extends 'base.html'%}
+
+{% block head %}
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+
+{# Include FontAwesome; required for icon display #}
+    
+
+
+ {% endblock head %}
+{%block title%}
+STR - 24 hr Examinations Ticket System
+{%endblock title%}
+
+
+{%block content%}
+
+<br>
+<br>
+
+<h1 class="center">CC</h1>
+<div class=' center container'>
+<div class=' row'>
+<div class=' col-sm'> 
+<form method="POST" action="{%url 'STRExam' object.Serial %}">
+{% csrf_token %}
+
+
+<h3 >STR Examination</h3>
+<input type="text",class="form-control form-group ", id="GangName" name="GangName"  style="background-color: white; color:black" placeholder="Enter Gang Name" aria-label="Enter Gang Name" >  
+<script>
+            $( "#GangName" ).autocomplete({
+              source: '{%url 'GangDetailLink3'%}'
+                });
+            </script>
+<div class='input-group date' id='datetimepicker1' >
+<input type='text' class="form-control form-group " name="WorkStart" placeholder="Work Start Date/Time " aria-label="Work Start Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker1').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker2' >
+<input type='text' class="form-control form-group " name="WorkEnd" placeholder="Work End Date/Time " aria-label="Work End Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker2').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+  
+<input type="number",class="form-control form-group ", name="BrakeBlock"  style="background-color: white; color:black" placeholder="BrakeBlock" aria-label="BrakeBlock" >  
+<input type="number",class="form-control form-group ", name="Empad"  style="background-color: white; color:black" placeholder="Empad" aria-label="Empad" >  
+<input type="number",class="form-control form-group ", name="AdopterChanged"  style="background-color: white; color:black" placeholder="AdopterChanged" aria-label="AdopterChanged" >  
+<input type="number",class="form-control form-group ", name="AdopterCantt"  style="background-color: white; color:black" placeholder="AdopterCantt" aria-label="AdopterCantt" >  
+<input type="number",class="form-control form-group ", name="SideBearerSpring"  style="background-color: white; color:black" placeholder="SideBearerSpring" aria-label="SideBearerSpring" >  
+<input type="number",class="form-control form-group ", name="JawLinerWeld"  style="background-color: white; color:black" placeholder="JawLinerWeld" aria-label="JawLinerWeld" >  
+<input type="number",class="form-control form-group ", name="ATLRepair"  style="background-color: white; color:black" placeholder="ATLRepair" aria-label="ATLRepair" >  
+
+</div>
+   
+
+
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
+</div>
+
+
+</div>
+<div class='container '>
+
+</div>
+<div class='container'>
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>RakeName</th>
+                <th>Date Time</th>
+                <th>WorkStart</th>
+                <th>WorkEnd</th>
+                <th>BrakeBlock</th>
+                <th>Empad</th>
+                <th>AdopterChanged</th>
+                <th>AdopterCantt</th>
+                <th>SideBearerSpring</th>
+                <th>JawLinerWeld</th>
+                <th>ATLRepair</th>
+                <th>Gang</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.RakeName}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.WorkStart}}</td>
+                <td class='text-primary'>{{object.WorkEnd}}</td>
+                <td class='text-primary'>{{object.BrakeBlock}}</a></td> 
+                <td class='text-primary'>{{object.Empad}}</td>
+                <td class='text-primary'>{{object.AdopterChanged}}</td>
+                <td class='text-primary'>{{object.AdopterCantt}}</td>
+                <td class='text-primary'>{{object.SideBearerSpring}}</a></td> 
+                <td class='text-primary'>{{object.JawLinerWeld}}</td>
+                <td class='text-primary'>{{object.ATLRepair}}</td>
+                <td class='text-primary'><a href="{%url 'Gang_detail' object.Gang.pk %}" >{{object.Gang}}</a></td>
+            </tr>
+        </tbody>
+       
+</table>
+</div>
+
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+</div)
+{%endblock content%}
+{%block afterbody%}
+<!-- this should go after your </body> -->
+<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+<script src="/jquery.js"></script>
+<script src="/build/jquery.datetimepicker.full.min.js"></script>
+{%endblock afterbody%}

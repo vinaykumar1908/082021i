@@ -10,7 +10,12 @@
   text-align: center;
 }
 </style>
-{% endblock head %}
+
+{# Include FontAwesome; required for icon display #}
+    
+
+
+ {% endblock head %}
 {%block title%}
 STR - 24 hr Examinations Ticket System
 {%endblock title%}
@@ -18,12 +23,204 @@ STR - 24 hr Examinations Ticket System
 
 {%block content%}
 
+<br>
+<br>
+
 <h1 class="center">STR</h1>
-<div class='center'>
-        <li class="list-group-item"><a href="{%url 'CC_home'%}">STR Pre Examination</a></li>
-        <li class="list-group-item"><a href="{%url 'STR_home'%}">STR Examination</a></li>
-        <li class="list-group-item"><a href="{%url 'STR_home'%}">STR Post Examination</a></li>
+<div class=' center container'>
+<div class=' row'>
+<div class=' col-sm'> 
+<form method="POST" action="{%url 'STRPreExam' %}">
+{% csrf_token %}
+
+
+<h3 >STR Pre Examination</h3>
+<input type="text",class="form-control form-group ", id="RakeName" name="RakeName"  style="background-color: white; color:black" placeholder="Enter Rake Name" aria-label="Enter Rake Name" >  
+<script>
+            $( "#RakeName" ).autocomplete({
+              source: '{%url 'RakeDetailLink3'%}'
+                });
+            </script>
+
+<input type="number",class="form-control form-group ", id="OldBPCNumber" name="OldBPCNumber"  style="background-color: white; color:black" placeholder="Enter Old BPC Number" aria-label="Enter Old BPC Number" >  
+
+<div class='input-group date' id='datetimepicker1' >
+<input type='text' class="form-control form-group " name="TKDInTime" placeholder="TKD In Date/Time " aria-label="TKD In Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker1').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker2' >
+<input type='text' class="form-control form-group " name="YardInTime" placeholder="Yard In Date/Time " aria-label="Yard In Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker2').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker3' >
+<input type='text' class="form-control form-group " name="SidingIn" placeholder="Siding In Date/Time " aria-label="Siding In Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker3').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+
+<div class='input-group date' id='datetimepicker4' >
+<input type='text' class="form-control form-group "  name="UnloadingStart" placeholder="Unloading Start Date/Time " aria-label="Unloading Start Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker4').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker5' >
+<input type='text' class="form-control form-group "  name="T431IssueTime" placeholder="T431 Issue Date/Time " aria-label="T431 Issue Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker5').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+<div class='input-group date' id='datetimepicker6' >
+<input type='text' class="form-control form-group "  name="T431ReceiveTime" placeholder="T431 Recieve Date/Time " aria-label="T431 Recieve Date/Time " />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+<script type="text/javascript">
+$(function() {
+$('#datetimepicker6').datetimepicker({
+format: 'YYYY-MM-DD HH:mm'
+});
+});
+</script>
+
+
+</div>
+   
+
+  <select id="ExamPlace" name="ExamPlace">
+    <option value="TKD_ACTL">TKD_ACTL </option>
+    <option value="TKD_HTPP_PWL">TKD_HTPP_PWL </option>
+    <option value="TKD_ICD">TKD_ICD </option>
+    <option value="TKD_YARD">TKD_YARD </option>
+  </select>
+            
+<input type="submit" value="save" style="background-color: lightcoral; color:black"/>
+</form>
 </div>
 
 
+</div>
+<div class='container '>
+
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Rake Name</th>
+                <th>Rake Base</th>
+                <th>Pre Examination Details</th>
+                <th>Examination Details</th>
+                <th>Post Examination Details</th>
+                
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                {% if object.PreExamDetails == True and object.ExamDetails == True and object.PostExamDetails == True %}
+                <td class='text-primary'><a href="{%url 'STRDetails' object.pk %}" >{{object.RakeName}}</a></td>
+                {% else %}
+                <td class='text-primary'>{{object.RakeName}}</td>                
+                {% endif %}
+                 
+                <td class='text-primary'>{{object.ExamPlace}}</td>
+                {% if object.PreExamDetails == False %}
+                <td class='text-primary' style="background-color:#FF6666"><a href="{%url 'STRPreExam'%}" >Details not Filled</a></td>
+                {% else %}
+                <td class='text-primary' style="background-color:lightgreen">Details Filled by {{object.author}}</td>
+                {% endif %}
+                {% if object.ExamDetails == False %}
+                <td class='text-primary' style="background-color:#FF6666"><a href="{%url 'STRExam' object.pk%}" >Details not Filled</a></td>
+                {% else %}
+                <td class='text-primary' style="background-color:lightgreen">Details Filled by {{object.examauthor}}</td>
+                {% endif %}
+                {% if object.PostExamDetails == False %}
+                <td class='text-primary' style="background-color:#FF6666"><a href="{%url 'STRPostExam' object.pk%}" >Details not Filled</a></td>
+                {% else %}
+                <td class='text-primary' style="background-color:lightgreen">Details Filled by {{object.postexamauthor}}</td>
+                {% endif %}
+                
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+</div)
 {%endblock content%}
+{%block afterbody%}
+<!-- this should go after your </body> -->
+<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+<script src="/jquery.js"></script>
+<script src="/build/jquery.datetimepicker.full.min.js"></script>
+{%endblock afterbody%}

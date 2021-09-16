@@ -53,6 +53,10 @@ INSTALLED_APPS = [
     'knowledge.apps.KnowledgeConfig',
     'exams.apps.ExamsConfig',
     'staff.apps.StaffConfig',
+    #"bootstrap4",
+    #'bootstrap_datepicker_plus',
+    'tempus_dominus'
+    
 
 ]
 
@@ -134,11 +138,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = 'media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_files'), ]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -154,3 +158,4 @@ LOGIN_URL = 'login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.Profile'
+TEMPUS_DOMINUS_INCLUDE_ASSETS = 'True'
